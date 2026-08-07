@@ -1,0 +1,757 @@
+{
+  "info": {
+    "_postman_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+    "name": "Solutech Backend API",
+    "description": "Master Postman Collection untuk aplikasi Solutech Backend. Terorganisir dalam folder per modul (Authentication, Crypto Utilities, Products, Orders) lengkap dengan berbagai contoh response (Examples) dan kondisi error.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:3000",
+      "type": "string"
+    },
+    {
+      "key": "jwt_token",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "client_key",
+      "value": "CLIENT_SOLUTECH_DEV_01",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Authentication",
+      "description": "Modul autentikasi user",
+      "item": [
+        {
+          "name": "Login",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 200) {",
+                  "    var responseData = pm.response.json();",
+                  "    if (responseData.data && responseData.data.token) {",
+                  "        pm.collectionVariables.set('jwt_token', responseData.data.token);",
+                  "        console.log('JWT Token successfully set to variable');",
+                  "    }",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"admin@solutech.id\",\n  \"password\": \"Admin@123\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/auth/login",
+              "host": ["{{base_url}}"],
+              "path": ["api", "auth", "login"]
+            },
+            "description": "Request Login tunggal untuk autentikasi user. Token JWT otomatis tersimpan di variable jwt_token saat response HTTP 200 OK."
+          },
+          "response": [
+            {
+              "name": "Example - Admin Login Success (200 OK)",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"admin@solutech.id\",\n  \"password\": \"Admin@123\"\n}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/auth/login",
+                  "host": ["{{base_url}}"],
+                  "path": ["api", "auth", "login"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"message\": \"Login successful\",\n  \"data\": {\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...\",\n    \"user\": {\n      \"id\": \"cmsj0l6vc0002fslw2f3dwnjs\",\n      \"email\": \"admin@solutech.id\",\n      \"name\": \"Admin Solutech\",\n      \"role\": \"ADMIN\"\n    }\n  }\n}"
+            },
+            {
+              "name": "Example - User Demo Login Success (200 OK)",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"user@solutech.id\",\n  \"password\": \"User@123\"\n}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/auth/login",
+                  "host": ["{{base_url}}"],
+                  "path": ["api", "auth", "login"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"message\": \"Login successful\",\n  \"data\": {\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...\",\n    \"user\": {\n      \"id\": \"cmsj0l6vc0003fslw2f3dwnjt\",\n      \"email\": \"user@solutech.id\",\n      \"name\": \"User Demo\",\n      \"role\": \"USER\"\n    }\n  }\n}"
+            },
+            {
+              "name": "Example - Invalid Credentials (401 Unauthorized)",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"admin@solutech.id\",\n  \"password\": \"WrongPassword123\"\n}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/auth/login",
+                  "host": ["{{base_url}}"],
+                  "path": ["api", "auth", "login"]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": false,\n  \"message\": \"Invalid email or password\"\n}"
+            },
+            {
+              "name": "Example - Validation Failed (400 Bad Request)",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"invalid-email\",\n  \"password\": \"\"\n}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/auth/login",
+                  "host": ["{{base_url}}"],
+                  "path": ["api", "auth", "login"]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": false,\n  \"message\": \"Validation failed\",\n  \"errors\": {\n    \"fieldErrors\": {\n      \"email\": [\"Invalid email format\"],\n      \"password\": [\"Password is required\"]\n    },\n    \"formErrors\": []\n  }\n}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Crypto Utilities",
+      "description": "Modul helper untuk testing enkripsi dan dekripsi payload (Dev/UAT only)",
+      "item": [
+        {
+          "name": "Generate Encrypted Payload",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Client-Key",
+                "value": "{{client_key}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"admin@solutech.id\",\n  \"password\": \"Admin@123\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/dev/encrypt",
+              "host": ["{{base_url}}"],
+              "path": ["api", "dev", "encrypt"]
+            },
+            "description": "Mengubah Plain JSON payload biasa menjadi format payload terenkripsi ({ encryptedKey, ciphertext, iv, authTag }) secara langsung."
+          },
+          "response": [
+            {
+              "name": "Example - Encrypt Success (200 OK)",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "X-Client-Key",
+                    "value": "CLIENT_SOLUTECH_DEV_01"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"admin@solutech.id\",\n  \"password\": \"Admin@123\"\n}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/dev/encrypt",
+                  "host": ["{{base_url}}"],
+                  "path": ["api", "dev", "encrypt"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"message\": \"Payload encrypted successfully\",\n  \"data\": {\n    \"clientKey\": \"CLIENT_SOLUTECH_DEV_01\",\n    \"encryptedPayload\": {\n      \"encryptedKey\": \"xDP/WvXoXNgHGK9Ymv92rFpgviV6gy5xEnMHoF138UvU...\",\n      \"ciphertext\": \"klLQ3zMXghF10i4x0diZ0yz38IMLqY/AOYQTm8bIuvVH...\",\n      \"iv\": \"WewDA3OQnk0daeXX\",\n      \"authTag\": \"drERRwEfCz4H3Aw9dAuY3A==\"\n    }\n  }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Decrypt Payload",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"encryptedKey\": \"xDP/WvXoXNgHGK9Ymv92rFpgviV6gy5xEnMHoF138UvU/beszRqDrmqBk1D8Gwkc3U5JzhDbXxn5IwjQiWYZU6JGj7Y5Va7Fb1jS2dfoDMF3ZJNZdYZrI/u0BV2yeAH045RApF4qc9ro81D0aVlE/XxkhxmQCsUSr43bIh1jJQo/8Q3707wmF9QHi2W7sBGdfsNGXUuq8bdMbZoehc1PTv2dVevfFT8K48Q0tx+MkPBGJE5gYN6Cw5x0ea7LnKNhkntr+kqyEfdE1rA/HaXmdTMrIgQn1qbcJPfDw+/b3Fn30QqAj4fo/EfES1d4gaOFCdkhdK+G6+XqO5H2DiQrzg==\",\n  \"ciphertext\": \"klLQ3zMXghF10i4x0diZ0yz38IMLqY/AOYQTm8bIuvVHJJKL2NFdw9kTxsWNjAj73og=\",\n  \"iv\": \"WewDA3OQnk0daeXX\",\n  \"authTag\": \"drERRwEfCz4H3Aw9dAuY3A==\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/dev/decrypt",
+              "host": ["{{base_url}}"],
+              "path": ["api", "dev", "decrypt"]
+            },
+            "description": "Mendekripsi payload terenkripsi ({ encryptedKey, ciphertext, iv, authTag }) kembali menjadi Plain JSON asli."
+          },
+          "response": [
+            {
+              "name": "Example - Decrypt Success (200 OK)",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"encryptedKey\": \"xDP/WvXoXNgHGK9Ymv92rFpgviV6gy5xEnMHoF138UvU...\",\n  \"ciphertext\": \"klLQ3zMXghF10i4x0diZ0yz38IMLqY/AOYQTm8bIuvVH...\",\n  \"iv\": \"WewDA3OQnk0daeXX\",\n  \"authTag\": \"drERRwEfCz4H3Aw9dAuY3A==\"\n}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/dev/decrypt",
+                  "host": ["{{base_url}}"],
+                  "path": ["api", "dev", "decrypt"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"message\": \"Payload decrypted successfully\",\n  \"data\": {\n    \"decryptedPayload\": {\n      \"email\": \"admin@solutech.id\",\n      \"password\": \"Admin@123\"\n    }\n  }\n}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Products",
+      "description": "Modul manajemen produk (CRUD)",
+      "item": [
+        {
+          "name": "Get List Products",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{jwt_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/products?page=1&limit=10&search=laptop",
+              "host": ["{{base_url}}"],
+              "path": ["api", "products"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1",
+                  "description": "Halaman yang diminta"
+                },
+                {
+                  "key": "limit",
+                  "value": "10",
+                  "description": "Jumlah item per halaman"
+                },
+                {
+                  "key": "search",
+                  "value": "laptop",
+                  "description": "Pencarian nama produk (opsional)"
+                }
+              ]
+            },
+            "description": "Mendapatkan daftar produk dengan pagination dan pencarian."
+          },
+          "response": [
+            {
+              "name": "Example - List Products Success (200 OK)",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/api/products?page=1&limit=10",
+                  "host": ["{{base_url}}"],
+                  "path": ["api", "products"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"message\": \"Products retrieved successfully\",\n  \"data\": [\n    {\n      \"id\": \"clx_prod_01\",\n      \"name\": \"Laptop ThinkPad X1\",\n      \"price\": 22000000,\n      \"stock\": 10\n    }\n  ],\n  \"pagination\": {\n    \"total\": 15,\n    \"page\": 1,\n    \"limit\": 10,\n    \"totalPages\": 2\n  }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Create Product",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{jwt_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Smartwatch Fitness Pro\",\n  \"price\": 1850000,\n  \"stock\": 25,\n  \"description\": \"Smartwatch dengan pemantau detak jantung dan pelacak GPS.\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/products",
+              "host": ["{{base_url}}"],
+              "path": ["api", "products"]
+            },
+            "description": "Membuat produk baru."
+          },
+          "response": [
+            {
+              "name": "Example - Create Product Success (201 Created)",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Smartwatch Fitness Pro\",\n  \"price\": 1850000,\n  \"stock\": 25\n}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/products",
+                  "host": ["{{base_url}}"],
+                  "path": ["api", "products"]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"message\": \"Product created successfully\",\n  \"data\": {\n    \"id\": \"clx_prod_new\",\n    \"name\": \"Smartwatch Fitness Pro\",\n    \"price\": 1850000,\n    \"stock\": 25\n  }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Get Product Detail",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{jwt_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/products/:id",
+              "host": ["{{base_url}}"],
+              "path": ["api", "products", ":id"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "clx_prod_01",
+                  "description": "ID produk"
+                }
+              ]
+            },
+            "description": "Mendapatkan detail satu produk berdasarkan ID."
+          },
+          "response": [
+            {
+              "name": "Example - Product Detail Success (200 OK)",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/api/products/clx_prod_01",
+                  "host": ["{{base_url}}"],
+                  "path": ["api", "products", "clx_prod_01"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"message\": \"Product retrieved successfully\",\n  \"data\": {\n    \"id\": \"clx_prod_01\",\n    \"name\": \"Laptop ThinkPad X1\",\n    \"price\": 22000000,\n    \"stock\": 10\n  }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Update Product",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{jwt_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"price\": 1750000,\n  \"stock\": 30\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/products/:id",
+              "host": ["{{base_url}}"],
+              "path": ["api", "products", ":id"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "clx_prod_01",
+                  "description": "ID produk"
+                }
+              ]
+            },
+            "description": "Memperbarui data produk (partial update)."
+          },
+          "response": [
+            {
+              "name": "Example - Update Product Success (200 OK)",
+              "originalRequest": {
+                "method": "PUT",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/api/products/clx_prod_01",
+                  "host": ["{{base_url}}"],
+                  "path": ["api", "products", "clx_prod_01"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"message\": \"Product updated successfully\",\n  \"data\": {\n    \"id\": \"clx_prod_01\",\n    \"price\": 1750000,\n    \"stock\": 30\n  }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Delete Product",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{jwt_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/products/:id",
+              "host": ["{{base_url}}"],
+              "path": ["api", "products", ":id"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "clx_prod_01",
+                  "description": "ID produk"
+                }
+              ]
+            },
+            "description": "Menghapus produk secara soft delete."
+          },
+          "response": [
+            {
+              "name": "Example - Delete Product Success (200 OK)",
+              "originalRequest": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/api/products/clx_prod_01",
+                  "host": ["{{base_url}}"],
+                  "path": ["api", "products", "clx_prod_01"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"message\": \"Product deleted successfully\"\n}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Orders",
+      "description": "Modul transaksi order",
+      "item": [
+        {
+          "name": "Create Order",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{jwt_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"items\": [\n    {\n      \"productId\": \"clx_prod_01\",\n      \"quantity\": 2\n    }\n  ]\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/orders",
+              "host": ["{{base_url}}"],
+              "path": ["api", "orders"]
+            },
+            "description": "Membuat transaksi order baru (multi-item transaction)."
+          },
+          "response": [
+            {
+              "name": "Example - Create Order Success (201 Created)",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/api/orders",
+                  "host": ["{{base_url}}"],
+                  "path": ["api", "orders"]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"message\": \"Order created successfully\",\n  \"data\": {\n    \"id\": \"clx_order_01\",\n    \"totalAmount\": 44000000,\n    \"status\": \"PENDING\"\n  }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Get Order Detail",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{jwt_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/orders/:id",
+              "host": ["{{base_url}}"],
+              "path": ["api", "orders", ":id"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "clx_order_01",
+                  "description": "ID order"
+                }
+              ]
+            },
+            "description": "Mendapatkan detail transaksi order."
+          },
+          "response": [
+            {
+              "name": "Example - Order Detail Success (200 OK)",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/api/orders/clx_order_01",
+                  "host": ["{{base_url}}"],
+                  "path": ["api", "orders", "clx_order_01"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"message\": \"Order retrieved successfully\",\n  \"data\": {\n    \"id\": \"clx_order_01\",\n    \"totalAmount\": 44000000,\n    \"status\": \"PENDING\"\n  }\n}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -16,6 +16,7 @@ import { PrismaPg } from "@prisma/adapter-pg";
 import { PrismaClient } from "../src/generated/prisma";
 import { seedRoles } from "./seeders/master/role.seeder";
 import { seedUsers } from "./seeders/master/user.seeder";
+import { seedApiClients } from "./seeders/master/client.seeder";
 import { seedProducts } from "./seeders/product/product.seeder";
 
 const connectionString = process.env.DATABASE_URL;
@@ -29,9 +30,10 @@ async function main() {
   console.log("╚════════════════════════════════════════╝\n");
 
   // ── 1. MASTER SCHEMA ─────────────────────────────────────────────
-  console.log("📋 [1/2] Master Schema — Roles & Users");
+  console.log("📋 [1/2] Master Schema — Roles, Users & ApiClients");
   const seededRoles = await seedRoles(prisma);
   await seedUsers(prisma, seededRoles);
+  await seedApiClients(prisma);
 
   // ── 2. PRODUCT SCHEMA ─────────────────────────────────────────────
   console.log("\n📦 [2/2] Product Schema — Products");

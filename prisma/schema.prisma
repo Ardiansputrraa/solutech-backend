@@ -86,6 +86,7 @@ model Product {
   /// Tidak boleh negatif. Divalidasi di service layer sebelum disimpan.
   stock       Int       @default(0)
   description String?
+  isDeleted   Boolean   @default(false) @map("is_deleted")
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
   /// Soft delete: NULL = produk aktif, terisi = produk "terhapus".
@@ -95,6 +96,7 @@ model Product {
 
   @@index([name])
   @@index([deletedAt])
+  @@index([isDeleted])
   @@schema("product")
   @@map("products")
 }

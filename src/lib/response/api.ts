@@ -3,10 +3,10 @@
  * Format response konsisten untuk seluruh endpoint REST API.
  *
  * Response sukses:
- * { success: true, message: string, data: T }
+ * { success: true, statusCode: number, message: string, data: T }
  *
  * Response error:
- * { success: false, message: string, errors?: unknown }
+ * { success: false, statusCode: number, message: string, errors?: unknown }
  */
 
 export function apiSuccess<T>(
@@ -14,7 +14,15 @@ export function apiSuccess<T>(
   message: string = "Success",
   status: number = 200
 ): Response {
-  return Response.json({ success: true, message, data }, { status });
+  return Response.json(
+    {
+      success: true,
+      statusCode: status,
+      message,
+      data,
+    },
+    { status }
+  );
 }
 
 export function apiError(
@@ -24,6 +32,7 @@ export function apiError(
 ): Response {
   const body = {
     success: false,
+    statusCode: status,
     message,
     ...(errors !== undefined && { errors }),
   };

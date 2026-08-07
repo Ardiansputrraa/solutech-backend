@@ -117,22 +117,36 @@ export async function decryptRequest(request: NextRequest): Promise<{
 /**
  * Enkripsi response sebelum dikembalikan ke client.
  *
- * Jika ENCRYPTION_ENABLED=false atau clientPublicKey null (local):
- * - Return Response.json() biasa.
- *
- * Jika ENCRYPTION_ENABLED=true (dev/uat/prod):
- * 1. Generate AES session key acak baru (ephemeral per response)
- * 2. Encrypt response JSON dengan AES session key
- * 3. Encrypt AES session key dengan Client RSA Public Key
- * 4. Return Response terenkripsi
+ * Memastikan urutan property JSON selalu RAPI (General info di paling atas):
+ * {
+ *   "success": boolean,
+ *   "statusCode": number,
+ *   "message": string,
+ *   "data": ...,
+ *   "pagination": ...
+ * }
  */
 export function encryptResponse(
   data: unknown,
   clientPublicKey: string | null,
   status: number = 200
 ): Response {
+  let responsePayload = data;
+
+  if (typeof data === "object" && data !== null) {
+    const rawObj = data as Record<string, unknown>;
+    const { success, statusCode, message, ...rest } = rawObj;
+
+    responsePayload = {
+      success: success ?? true,
+      statusCode: statusCode ?? status,
+      message: message ?? "Success",
+      ...rest,
+    };
+  }
+
   if (!isEncryptionEnabled() || !clientPublicKey) {
-    return Response.json(data, { status });
+    return Response.json(responsePayload, { status });
   }
 
   // 1. Generate ephemeral 256-bit AES key untuk response ini
@@ -140,7 +154,7 @@ export function encryptResponse(
 
   // 2. Encrypt response JSON dengan AES-256-GCM
   const { ciphertext, iv, authTag } = aesEncrypt(
-    JSON.stringify(data),
+    JSON.stringify(responsePayload),
     aesKeyBuffer
   );
 

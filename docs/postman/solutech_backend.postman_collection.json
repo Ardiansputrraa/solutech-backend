@@ -2,7 +2,7 @@
   "info": {
     "_postman_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
     "name": "Solutech Backend API",
-    "description": "Master Postman Collection untuk aplikasi Solutech Backend. Terorganisir dalam folder per modul (Authentication, Crypto Utilities, Products, Orders) lengkap dengan berbagai contoh response (Examples) dan kondisi error.",
+    "description": "Master Postman Collection untuk aplikasi Solutech Backend. Terorganisir dalam folder per modul (Authentication, Crypto Utilities, Products, Orders) lengkap dengan contoh respon status code resmi yang benar-benar ada di aplikasi.",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "variable": [
@@ -67,7 +67,7 @@
           },
           "response": [
             {
-              "name": "Example - Admin Login Success (200 OK)",
+              "name": "Example - 200 OK (Admin Login Success)",
               "originalRequest": {
                 "method": "POST",
                 "header": [
@@ -96,10 +96,10 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"message\": \"Login successful\",\n  \"data\": {\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...\",\n    \"user\": {\n      \"id\": \"cmsj0l6vc0002fslw2f3dwnjs\",\n      \"email\": \"admin@solutech.id\",\n      \"name\": \"Admin Solutech\",\n      \"role\": \"ADMIN\"\n    }\n  }\n}"
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Login successful\",\n  \"data\": {\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...\",\n    \"user\": {\n      \"id\": \"cmsj0l6vc0002fslw2f3dwnjs\",\n      \"email\": \"admin@solutech.id\",\n      \"name\": \"Admin Solutech\",\n      \"role\": \"ADMIN\"\n    }\n  }\n}"
             },
             {
-              "name": "Example - User Demo Login Success (200 OK)",
+              "name": "Example - 200 OK (User Demo Login Success)",
               "originalRequest": {
                 "method": "POST",
                 "header": [
@@ -128,21 +128,25 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"message\": \"Login successful\",\n  \"data\": {\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...\",\n    \"user\": {\n      \"id\": \"cmsj0l6vc0003fslw2f3dwnjt\",\n      \"email\": \"user@solutech.id\",\n      \"name\": \"User Demo\",\n      \"role\": \"USER\"\n    }\n  }\n}"
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Login successful\",\n  \"data\": {\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...\",\n    \"user\": {\n      \"id\": \"cmsj0l6vc0003fslw2f3dwnjt\",\n      \"email\": \"user@solutech.id\",\n      \"name\": \"User Demo\",\n      \"role\": \"USER\"\n    }\n  }\n}"
             },
             {
-              "name": "Example - Invalid Credentials (401 Unauthorized)",
+              "name": "Example - 200 OK (Encrypted Payload Mode)",
               "originalRequest": {
                 "method": "POST",
                 "header": [
                   {
                     "key": "Content-Type",
                     "value": "application/json"
+                  },
+                  {
+                    "key": "X-Client-Key",
+                    "value": "CLIENT_SOLUTECH_DEV_01"
                   }
                 ],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"email\": \"admin@solutech.id\",\n  \"password\": \"WrongPassword123\"\n}"
+                  "raw": "{\n  \"encryptedKey\": \"xDP/WvXoXNgHGK9Ymv92rFpgviV6gy5xEnMHoF138UvU/beszRqDrmqBk1D8Gwkc3U5JzhDbXxn5IwjQiWYZU6JGj7Y5Va7Fb1jS2dfoDMF3ZJNZdYZrI/u0BV2yeAH045RApF4qc9ro81D0aVlE/XxkhxmQCsUSr43bIh1jJQo/8Q3707wmF9QHi2W7sBGdfsNGXUuq8bdMbZoehc1PTv2dVevfFT8K48Q0tx+MkPBGJE5gYN6Cw5x0ea7LnKNhkntr+kqyEfdE1rA/HaXmdTMrIgQn1qbcJPfDw+/b3Fn30QqAj4fo/EfES1d4gaOFCdkhdK+G6+XqO5H2DiQrzg==\",\n  \"ciphertext\": \"klLQ3zMXghF10i4x0diZ0yz38IMLqY/AOYQTm8bIuvVHJJKL2NFdw9kTxsWNjAj73og=\",\n  \"iv\": \"WewDA3OQnk0daeXX\",\n  \"authTag\": \"drERRwEfCz4H3Aw9dAuY3A==\"\n}"
                 },
                 "url": {
                   "raw": "{{base_url}}/api/auth/login",
@@ -150,8 +154,8 @@
                   "path": ["api", "auth", "login"]
                 }
               },
-              "status": "Unauthorized",
-              "code": 401,
+              "status": "OK",
+              "code": 200,
               "_postman_previewlanguage": "json",
               "header": [
                 {
@@ -160,10 +164,10 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n  \"success\": false,\n  \"message\": \"Invalid email or password\"\n}"
+              "body": "{\n  \"encryptedKey\": \"ygJJkjKYAyl738WZBYfhysEbKL4S8jrN+W2ijBGvwTc80n2i02czPi+VvXHuObrMg5CXjS5lm5BW0tp+gJbBLM7zy0jSGz2LrMyBTSA+YOYCbL9Xo7UGIUpJLqHgu4MCU6TdNF+dqNbOTp/+1vYK4JaaOzKtEQE3CJEDOQWz/lhZVEFISvSz4L1M91f1Ks7yLLhe7Gyf8utwZUlc/15Ikn7E4QiBW7zWc8TCTh/hzBDp4Oshqja/KFl1MeSzEb8V8m2JzCf+xU98FSFeofKgoi5bIMZTF1YV3mgnwvTUHWzdfjnW2g5PL9Ki+m9p5ATAxE5VVeCirbI22+MhBf173A==\",\n  \"ciphertext\": \"vhRCSbcR0Cr2Vf7LJhTn6OdoDPFJkHpA4eV2/uzURN2SQmDENkYuInOdi2qgVTL9vts=\",\n  \"iv\": \"mgUna3ATB6dXQqbC\",\n  \"authTag\": \"i/xhkS/VnQGMk55dzWAVTg==\"\n}"
             },
             {
-              "name": "Example - Validation Failed (400 Bad Request)",
+              "name": "Example - 400 Bad Request (Validation Failed)",
               "originalRequest": {
                 "method": "POST",
                 "header": [
@@ -192,7 +196,39 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n  \"success\": false,\n  \"message\": \"Validation failed\",\n  \"errors\": {\n    \"fieldErrors\": {\n      \"email\": [\"Invalid email format\"],\n      \"password\": [\"Password is required\"]\n    },\n    \"formErrors\": []\n  }\n}"
+              "body": "{\n  \"success\": false,\n  \"statusCode\": 400,\n  \"message\": \"Validation failed\",\n  \"errors\": {\n    \"fieldErrors\": {\n      \"email\": [\"Invalid email format\"],\n      \"password\": [\"Password is required\"]\n    },\n    \"formErrors\": []\n  }\n}"
+            },
+            {
+              "name": "Example - 500 Internal Server Error (Database Connection Error)",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"admin@solutech.id\",\n  \"password\": \"Admin@123\"\n}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/auth/login",
+                  "host": ["{{base_url}}"],
+                  "path": ["api", "auth", "login"]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": false,\n  \"statusCode\": 500,\n  \"message\": \"Internal server error\"\n}"
             }
           ]
         }
@@ -229,7 +265,7 @@
           },
           "response": [
             {
-              "name": "Example - Encrypt Success (200 OK)",
+              "name": "Example - 200 OK (Encrypt Success)",
               "originalRequest": {
                 "method": "POST",
                 "header": [
@@ -262,7 +298,71 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"message\": \"Payload encrypted successfully\",\n  \"data\": {\n    \"clientKey\": \"CLIENT_SOLUTECH_DEV_01\",\n    \"encryptedPayload\": {\n      \"encryptedKey\": \"xDP/WvXoXNgHGK9Ymv92rFpgviV6gy5xEnMHoF138UvU...\",\n      \"ciphertext\": \"klLQ3zMXghF10i4x0diZ0yz38IMLqY/AOYQTm8bIuvVH...\",\n      \"iv\": \"WewDA3OQnk0daeXX\",\n      \"authTag\": \"drERRwEfCz4H3Aw9dAuY3A==\"\n    }\n  }\n}"
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Payload encrypted successfully\",\n  \"data\": {\n    \"clientKey\": \"CLIENT_SOLUTECH_DEV_01\",\n    \"encryptedPayload\": {\n      \"encryptedKey\": \"xDP/WvXoXNgHGK9Ymv92rFpgviV6gy5xEnMHoF138UvU...\",\n      \"ciphertext\": \"klLQ3zMXghF10i4x0diZ0yz38IMLqY/AOYQTm8bIuvVH...\",\n      \"iv\": \"WewDA3OQnk0daeXX\",\n      \"authTag\": \"drERRwEfCz4H3Aw9dAuY3A==\"\n    }\n  }\n}"
+            },
+            {
+              "name": "Example - 400 Bad Request (Invalid Payload)",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "invalid-json"
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/dev/encrypt",
+                  "host": ["{{base_url}}"],
+                  "path": ["api", "dev", "encrypt"]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": false,\n  \"statusCode\": 400,\n  \"message\": \"Encryption failed: Invalid JSON input\"\n}"
+            },
+            {
+              "name": "Example - 500 Internal Server Error (RSA Key Error)",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"test\": \"data\"\n}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/dev/encrypt",
+                  "host": ["{{base_url}}"],
+                  "path": ["api", "dev", "encrypt"]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": false,\n  \"statusCode\": 500,\n  \"message\": \"Internal server error\"\n}"
             }
           ]
         },
@@ -289,7 +389,7 @@
           },
           "response": [
             {
-              "name": "Example - Decrypt Success (200 OK)",
+              "name": "Example - 200 OK (Decrypt Success)",
               "originalRequest": {
                 "method": "POST",
                 "header": [
@@ -318,7 +418,39 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"message\": \"Payload decrypted successfully\",\n  \"data\": {\n    \"decryptedPayload\": {\n      \"email\": \"admin@solutech.id\",\n      \"password\": \"Admin@123\"\n    }\n  }\n}"
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Payload decrypted successfully\",\n  \"data\": {\n    \"decryptedPayload\": {\n      \"email\": \"admin@solutech.id\",\n      \"password\": \"Admin@123\"\n    }\n  }\n}"
+            },
+            {
+              "name": "Example - 400 Bad Request (Invalid Tampered Ciphertext)",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"encryptedKey\": \"invalid\",\n  \"ciphertext\": \"invalid\",\n  \"iv\": \"invalid\",\n  \"authTag\": \"invalid\"\n}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/dev/decrypt",
+                  "host": ["{{base_url}}"],
+                  "path": ["api", "dev", "decrypt"]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": false,\n  \"statusCode\": 400,\n  \"message\": \"Decryption failed: RSA/AES authentication tag mismatch\"\n}"
             }
           ]
         }
@@ -326,7 +458,7 @@
     },
     {
       "name": "Products",
-      "description": "Modul manajemen produk (CRUD)",
+      "description": "Modul manajemen produk (CRUD, Pagination, Search, Soft Delete, & Role Permission)",
       "item": [
         {
           "name": "Get List Products",
@@ -365,11 +497,11 @@
                 }
               ]
             },
-            "description": "Mendapatkan daftar produk dengan pagination dan pencarian."
+            "description": "Mendapatkan daftar produk aktif (isDeleted: false & deletedAt: null) dengan pagination dan pencarian. Bisa diakses oleh ADMIN dan USER."
           },
           "response": [
             {
-              "name": "Example - List Products Success (200 OK)",
+              "name": "Example - 200 OK (List Products Success)",
               "originalRequest": {
                 "method": "GET",
                 "header": [],
@@ -389,7 +521,127 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"message\": \"Products retrieved successfully\",\n  \"data\": [\n    {\n      \"id\": \"clx_prod_01\",\n      \"name\": \"Laptop ThinkPad X1\",\n      \"price\": 22000000,\n      \"stock\": 10\n    }\n  ],\n  \"pagination\": {\n    \"total\": 15,\n    \"page\": 1,\n    \"limit\": 10,\n    \"totalPages\": 2\n  }\n}"
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Products retrieved successfully\",\n  \"data\": [\n    {\n      \"id\": \"cmsj4pxbt0000qglwtaxg3rlk\",\n      \"name\": \"Laptop ThinkPad X1 Carbon\",\n      \"price\": 22000000,\n      \"stock\": 10,\n      \"description\": \"Business Ultrabook\",\n      \"isDeleted\": false,\n      \"createdAt\": \"2026-08-07T15:00:00.000Z\",\n      \"updatedAt\": \"2026-08-07T15:00:00.000Z\",\n      \"deletedAt\": null\n    }\n  ],\n  \"pagination\": {\n    \"total\": 15,\n    \"page\": 1,\n    \"limit\": 10,\n    \"totalPages\": 2\n  }\n}"
+            },
+            {
+              "name": "Example - 200 OK (Encrypted Response Mode)",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "X-Client-Key",
+                    "value": "CLIENT_SOLUTECH_DEV_01"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/products?page=1&limit=10",
+                  "host": ["{{base_url}}"],
+                  "path": ["api", "products"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"encryptedKey\": \"ygJJkjKYAyl738WZBYfhysEbKL4S8jrN+W2ijBGvwTc80n2i02czPi+VvXHuObrMg5CXjS5lm5BW0tp+gJbBLM7zy0jSGz2LrMyBTSA+YOYCbL9Xo7UGIUpJLqHgu4MCU6TdNF+dqNbOTp/+1vYK4JaaOzKtEQE3CJEDOQWz/lhZVEFISvSz4L1M91f1Ks7yLLhe7Gyf8utwZUlc/15Ikn7E4QiBW7zWc8TCTh/hzBDp4Oshqja/KFl1MeSzEb8V8m2JzCf+xU98FSFeofKgoi5bIMZTF1YV3mgnwvTUHWzdfjnW2g5PL9Ki+m9p5ATAxE5VVeCirbI22+MhBf173A==\",\n  \"ciphertext\": \"vhRCSbcR0Cr2Vf7LJhTn6OdoDPFJkHpA4eV2/uzURN2SQmDENkYuInOdi2qgVTL9vts=\",\n  \"iv\": \"mgUna3ATB6dXQqbC\",\n  \"authTag\": \"i/xhkS/VnQGMk55dzWAVTg==\"\n}"
+            },
+            {
+              "name": "Example - 400 Bad Request (Invalid Query Params)",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/api/products?page=abc&limit=-5",
+                  "host": ["{{base_url}}"],
+                  "path": ["api", "products"]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": false,\n  \"statusCode\": 400,\n  \"message\": \"Invalid query parameters\",\n  \"errors\": {\n    \"fieldErrors\": {\n      \"page\": [\"Expected number, received nan\"],\n      \"limit\": [\"Number must be greater than 0\"]\n    }\n  }\n}"
+            },
+            {
+              "name": "Example - 401 Unauthorized (Missing Bearer Token)",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/api/products",
+                  "host": ["{{base_url}}"],
+                  "path": ["api", "products"]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": false,\n  \"statusCode\": 401,\n  \"message\": \"Authorization token required\"\n}"
+            },
+            {
+              "name": "Example - 403 Forbidden (Forbidden: You do not have permission.)",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/api/products",
+                  "host": ["{{base_url}}"],
+                  "path": ["api", "products"]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": false,\n  \"statusCode\": 403,\n  \"message\": \"Forbidden: You do not have permission.\"\n}"
+            },
+            {
+              "name": "Example - 500 Internal Server Error (Database Error)",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/api/products",
+                  "host": ["{{base_url}}"],
+                  "path": ["api", "products"]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": false,\n  \"statusCode\": 500,\n  \"message\": \"Internal server error\"\n}"
             }
           ]
         },
@@ -415,18 +667,18 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"name\": \"Smartwatch Fitness Pro\",\n  \"price\": 1850000,\n  \"stock\": 25,\n  \"description\": \"Smartwatch dengan pemantau detak jantung dan pelacak GPS.\"\n}"
+              "raw": "{\n  \"name\": \"Mechanical Keyboard RGB\",\n  \"price\": 1250000,\n  \"stock\": 15,\n  \"description\": \"Gaming mechanical keyboard dengan hot-swappable switch.\"\n}"
             },
             "url": {
               "raw": "{{base_url}}/api/products",
               "host": ["{{base_url}}"],
               "path": ["api", "products"]
             },
-            "description": "Membuat produk baru."
+            "description": "Membuat produk baru. HANYA BISA DIAKSES OLEH ROLE ADMIN."
           },
           "response": [
             {
-              "name": "Example - Create Product Success (201 Created)",
+              "name": "Example - 201 Created (Product Created Success)",
               "originalRequest": {
                 "method": "POST",
                 "header": [
@@ -437,7 +689,7 @@
                 ],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"name\": \"Smartwatch Fitness Pro\",\n  \"price\": 1850000,\n  \"stock\": 25\n}"
+                  "raw": "{\n  \"name\": \"Mechanical Keyboard RGB\",\n  \"price\": 1250000,\n  \"stock\": 15,\n  \"description\": \"Gaming mechanical keyboard dengan hot-swappable switch.\"\n}"
                 },
                 "url": {
                   "raw": "{{base_url}}/api/products",
@@ -455,7 +707,162 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"message\": \"Product created successfully\",\n  \"data\": {\n    \"id\": \"clx_prod_new\",\n    \"name\": \"Smartwatch Fitness Pro\",\n    \"price\": 1850000,\n    \"stock\": 25\n  }\n}"
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 201,\n  \"message\": \"Product created successfully\",\n  \"data\": {\n    \"id\": \"cmsj4pxbt0000qglwtaxg3rlk\",\n    \"name\": \"Mechanical Keyboard RGB\",\n    \"price\": 1250000,\n    \"stock\": 15,\n    \"description\": \"Gaming mechanical keyboard dengan hot-swappable switch.\",\n    \"isDeleted\": false,\n    \"createdAt\": \"2026-08-07T15:58:20.921Z\",\n    \"updatedAt\": \"2026-08-07T15:58:20.921Z\",\n    \"deletedAt\": null\n  }\n}"
+            },
+            {
+              "name": "Example - 201 Created (Encrypted Payload Mode)",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "X-Client-Key",
+                    "value": "CLIENT_SOLUTECH_DEV_01"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"encryptedKey\": \"xDP/WvXoXNgHGK9Ymv92rFpgviV6gy5xEnMHoF138UvU/beszRqDrmqBk1D8Gwkc3U5JzhDbXxn5IwjQiWYZU6JGj7Y5Va7Fb1jS2dfoDMF3ZJNZdYZrI/u0BV2yeAH045RApF4qc9ro81D0aVlE/XxkhxmQCsUSr43bIh1jJQo/8Q3707wmF9QHi2W7sBGdfsNGXUuq8bdMbZoehc1PTv2dVevfFT8K48Q0tx+MkPBGJE5gYN6Cw5x0ea7LnKNhkntr+kqyEfdE1rA/HaXmdTMrIgQn1qbcJPfDw+/b3Fn30QqAj4fo/EfES1d4gaOFCdkhdK+G6+XqO5H2DiQrzg==\",\n  \"ciphertext\": \"klLQ3zMXghF10i4x0diZ0yz38IMLqY/AOYQTm8bIuvVHJJKL2NFdw9kTxsWNjAj73og=\",\n  \"iv\": \"WewDA3OQnk0daeXX\",\n  \"authTag\": \"drERRwEfCz4H3Aw9dAuY3A==\"\n}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/products",
+                  "host": ["{{base_url}}"],
+                  "path": ["api", "products"]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"encryptedKey\": \"ygJJkjKYAyl738WZBYfhysEbKL4S8jrN+W2ijBGvwTc80n2i02czPi+VvXHuObrMg5CXjS5lm5BW0tp+gJbBLM7zy0jSGz2LrMyBTSA+YOYCbL9Xo7UGIUpJLqHgu4MCU6TdNF+dqNbOTp/+1vYK4JaaOzKtEQE3CJEDOQWz/lhZVEFISvSz4L1M91f1Ks7yLLhe7Gyf8utwZUlc/15Ikn7E4QiBW7zWc8TCTh/hzBDp4Oshqja/KFl1MeSzEb8V8m2JzCf+xU98FSFeofKgoi5bIMZTF1YV3mgnwvTUHWzdfjnW2g5PL9Ki+m9p5ATAxE5VVeCirbI22+MhBf173A==\",\n  \"ciphertext\": \"vhRCSbcR0Cr2Vf7LJhTn6OdoDPFJkHpA4eV2/uzURN2SQmDENkYuInOdi2qgVTL9vts=\",\n  \"iv\": \"mgUna3ATB6dXQqbC\",\n  \"authTag\": \"i/xhkS/VnQGMk55dzWAVTg==\"\n}"
+            },
+            {
+              "name": "Example - 400 Bad Request (Validation Failed)",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"\",\n  \"price\": -500,\n  \"stock\": -1\n}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/products",
+                  "host": ["{{base_url}}"],
+                  "path": ["api", "products"]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": false,\n  \"statusCode\": 400,\n  \"message\": \"Validation failed\",\n  \"errors\": {\n    \"fieldErrors\": {\n      \"name\": [\"Product name is required\"],\n      \"price\": [\"Price must be greater than zero\"],\n      \"stock\": [\"Stock cannot be negative\"]\n    }\n  }\n}"
+            },
+            {
+              "name": "Example - 401 Unauthorized (Invalid Token)",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/api/products",
+                  "host": ["{{base_url}}"],
+                  "path": ["api", "products"]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": false,\n  \"statusCode\": 401,\n  \"message\": \"Authorization token required\"\n}"
+            },
+            {
+              "name": "Example - 403 Forbidden (Non-Admin User)",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Mechanical Keyboard RGB\",\n  \"price\": 1250000,\n  \"stock\": 15\n}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/products",
+                  "host": ["{{base_url}}"],
+                  "path": ["api", "products"]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": false,\n  \"statusCode\": 403,\n  \"message\": \"Forbidden: You do not have permission.\"\n}"
+            },
+            {
+              "name": "Example - 500 Internal Server Error (Database Error)",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Mechanical Keyboard RGB\",\n  \"price\": 1250000,\n  \"stock\": 15\n}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/products",
+                  "host": ["{{base_url}}"],
+                  "path": ["api", "products"]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": false,\n  \"statusCode\": 500,\n  \"message\": \"Internal server error\"\n}"
             }
           ]
         },
@@ -481,23 +888,23 @@
               "variable": [
                 {
                   "key": "id",
-                  "value": "clx_prod_01",
+                  "value": "cmsj4pxbt0000qglwtaxg3rlk",
                   "description": "ID produk"
                 }
               ]
             },
-            "description": "Mendapatkan detail satu produk berdasarkan ID."
+            "description": "Mendapatkan detail satu produk berdasarkan ID. Bisa diakses oleh ADMIN dan USER."
           },
           "response": [
             {
-              "name": "Example - Product Detail Success (200 OK)",
+              "name": "Example - 200 OK (Product Detail Success)",
               "originalRequest": {
                 "method": "GET",
                 "header": [],
                 "url": {
-                  "raw": "{{base_url}}/api/products/clx_prod_01",
+                  "raw": "{{base_url}}/api/products/cmsj4pxbt0000qglwtaxg3rlk",
                   "host": ["{{base_url}}"],
-                  "path": ["api", "products", "clx_prod_01"]
+                  "path": ["api", "products", "cmsj4pxbt0000qglwtaxg3rlk"]
                 }
               },
               "status": "OK",
@@ -510,7 +917,127 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"message\": \"Product retrieved successfully\",\n  \"data\": {\n    \"id\": \"clx_prod_01\",\n    \"name\": \"Laptop ThinkPad X1\",\n    \"price\": 22000000,\n    \"stock\": 10\n  }\n}"
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Product retrieved successfully\",\n  \"data\": {\n    \"id\": \"cmsj4pxbt0000qglwtaxg3rlk\",\n    \"name\": \"Mechanical Keyboard RGB\",\n    \"price\": 1250000,\n    \"stock\": 15,\n    \"description\": \"Gaming mechanical keyboard dengan hot-swappable switch.\",\n    \"isDeleted\": false,\n    \"createdAt\": \"2026-08-07T15:58:20.921Z\",\n    \"updatedAt\": \"2026-08-07T15:58:20.921Z\",\n    \"deletedAt\": null\n  }\n}"
+            },
+            {
+              "name": "Example - 200 OK (Encrypted Response Mode)",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "X-Client-Key",
+                    "value": "CLIENT_SOLUTECH_DEV_01"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/products/cmsj4pxbt0000qglwtaxg3rlk",
+                  "host": ["{{base_url}}"],
+                  "path": ["api", "products", "cmsj4pxbt0000qglwtaxg3rlk"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"encryptedKey\": \"ygJJkjKYAyl738WZBYfhysEbKL4S8jrN+W2ijBGvwTc80n2i02czPi+VvXHuObrMg5CXjS5lm5BW0tp+gJbBLM7zy0jSGz2LrMyBTSA+YOYCbL9Xo7UGIUpJLqHgu4MCU6TdNF+dqNbOTp/+1vYK4JaaOzKtEQE3CJEDOQWz/lhZVEFISvSz4L1M91f1Ks7yLLhe7Gyf8utwZUlc/15Ikn7E4QiBW7zWc8TCTh/hzBDp4Oshqja/KFl1MeSzEb8V8m2JzCf+xU98FSFeofKgoi5bIMZTF1YV3mgnwvTUHWzdfjnW2g5PL9Ki+m9p5ATAxE5VVeCirbI22+MhBf173A==\",\n  \"ciphertext\": \"vhRCSbcR0Cr2Vf7LJhTn6OdoDPFJkHpA4eV2/uzURN2SQmDENkYuInOdi2qgVTL9vts=\",\n  \"iv\": \"mgUna3ATB6dXQqbC\",\n  \"authTag\": \"i/xhkS/VnQGMk55dzWAVTg==\"\n}"
+            },
+            {
+              "name": "Example - 400 Bad Request (Invalid ID)",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/api/products/invalid_id_format",
+                  "host": ["{{base_url}}"],
+                  "path": ["api", "products", "invalid_id_format"]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": false,\n  \"statusCode\": 400,\n  \"message\": \"Invalid product ID format\"\n}"
+            },
+            {
+              "name": "Example - 401 Unauthorized (Missing Bearer Token)",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/api/products/cmsj4pxbt0000qglwtaxg3rlk",
+                  "host": ["{{base_url}}"],
+                  "path": ["api", "products", "cmsj4pxbt0000qglwtaxg3rlk"]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": false,\n  \"statusCode\": 401,\n  \"message\": \"Authorization token required\"\n}"
+            },
+            {
+              "name": "Example - 404 Not Found (Product Soft Deleted)",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/api/products/non-existent-id",
+                  "host": ["{{base_url}}"],
+                  "path": ["api", "products", "non-existent-id"]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": false,\n  \"statusCode\": 404,\n  \"message\": \"Product not found\"\n}"
+            },
+            {
+              "name": "Example - 500 Internal Server Error (Database Error)",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/api/products/cmsj4pxbt0000qglwtaxg3rlk",
+                  "host": ["{{base_url}}"],
+                  "path": ["api", "products", "cmsj4pxbt0000qglwtaxg3rlk"]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": false,\n  \"statusCode\": 500,\n  \"message\": \"Internal server error\"\n}"
             }
           ]
         },
@@ -536,7 +1063,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"price\": 1750000,\n  \"stock\": 30\n}"
+              "raw": "{\n  \"price\": 1150000,\n  \"stock\": 20\n}"
             },
             "url": {
               "raw": "{{base_url}}/api/products/:id",
@@ -545,23 +1072,23 @@
               "variable": [
                 {
                   "key": "id",
-                  "value": "clx_prod_01",
+                  "value": "cmsj4pxbt0000qglwtaxg3rlk",
                   "description": "ID produk"
                 }
               ]
             },
-            "description": "Memperbarui data produk (partial update)."
+            "description": "Memperbarui data produk (partial update). HANYA BISA DIAKSES OLEH ROLE ADMIN."
           },
           "response": [
             {
-              "name": "Example - Update Product Success (200 OK)",
+              "name": "Example - 200 OK (Product Updated Success)",
               "originalRequest": {
                 "method": "PUT",
                 "header": [],
                 "url": {
-                  "raw": "{{base_url}}/api/products/clx_prod_01",
+                  "raw": "{{base_url}}/api/products/cmsj4pxbt0000qglwtaxg3rlk",
                   "host": ["{{base_url}}"],
-                  "path": ["api", "products", "clx_prod_01"]
+                  "path": ["api", "products", "cmsj4pxbt0000qglwtaxg3rlk"]
                 }
               },
               "status": "OK",
@@ -574,12 +1101,172 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"message\": \"Product updated successfully\",\n  \"data\": {\n    \"id\": \"clx_prod_01\",\n    \"price\": 1750000,\n    \"stock\": 30\n  }\n}"
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Product updated successfully\",\n  \"data\": {\n    \"id\": \"cmsj4pxbt0000qglwtaxg3rlk\",\n    \"name\": \"Mechanical Keyboard RGB\",\n    \"price\": 1150000,\n    \"stock\": 20,\n    \"description\": \"Gaming mechanical keyboard dengan hot-swappable switch.\",\n    \"isDeleted\": false,\n    \"createdAt\": \"2026-08-07T15:58:20.921Z\",\n    \"updatedAt\": \"2026-08-07T15:58:22.449Z\",\n    \"deletedAt\": null\n  }\n}"
+            },
+            {
+              "name": "Example - 200 OK (Encrypted Payload Mode)",
+              "originalRequest": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "X-Client-Key",
+                    "value": "CLIENT_SOLUTECH_DEV_01"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"encryptedKey\": \"xDP/WvXoXNgHGK9Ymv92rFpgviV6gy5xEnMHoF138UvU/beszRqDrmqBk1D8Gwkc3U5JzhDbXxn5IwjQiWYZU6JGj7Y5Va7Fb1jS2dfoDMF3ZJNZdYZrI/u0BV2yeAH045RApF4qc9ro81D0aVlE/XxkhxmQCsUSr43bIh1jJQo/8Q3707wmF9QHi2W7sBGdfsNGXUuq8bdMbZoehc1PTv2dVevfFT8K48Q0tx+MkPBGJE5gYN6Cw5x0ea7LnKNhkntr+kqyEfdE1rA/HaXmdTMrIgQn1qbcJPfDw+/b3Fn30QqAj4fo/EfES1d4gaOFCdkhdK+G6+XqO5H2DiQrzg==\",\n  \"ciphertext\": \"klLQ3zMXghF10i4x0diZ0yz38IMLqY/AOYQTm8bIuvVHJJKL2NFdw9kTxsWNjAj73og=\",\n  \"iv\": \"WewDA3OQnk0daeXX\",\n  \"authTag\": \"drERRwEfCz4H3Aw9dAuY3A==\"\n}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/products/cmsj4pxbt0000qglwtaxg3rlk",
+                  "host": ["{{base_url}}"],
+                  "path": ["api", "products", "cmsj4pxbt0000qglwtaxg3rlk"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"encryptedKey\": \"ygJJkjKYAyl738WZBYfhysEbKL4S8jrN+W2ijBGvwTc80n2i02czPi+VvXHuObrMg5CXjS5lm5BW0tp+gJbBLM7zy0jSGz2LrMyBTSA+YOYCbL9Xo7UGIUpJLqHgu4MCU6TdNF+dqNbOTp/+1vYK4JaaOzKtEQE3CJEDOQWz/lhZVEFISvSz4L1M91f1Ks7yLLhe7Gyf8utwZUlc/15Ikn7E4QiBW7zWc8TCTh/hzBDp4Oshqja/KFl1MeSzEb8V8m2JzCf+xU98FSFeofKgoi5bIMZTF1YV3mgnwvTUHWzdfjnW2g5PL9Ki+m9p5ATAxE5VVeCirbI22+MhBf173A==\",\n  \"ciphertext\": \"vhRCSbcR0Cr2Vf7LJhTn6OdoDPFJkHpA4eV2/uzURN2SQmDENkYuInOdi2qgVTL9vts=\",\n  \"iv\": \"mgUna3ATB6dXQqbC\",\n  \"authTag\": \"i/xhkS/VnQGMk55dzWAVTg==\"\n}"
+            },
+            {
+              "name": "Example - 400 Bad Request (Validation Failed)",
+              "originalRequest": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"price\": -100\n}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/products/cmsj4pxbt0000qglwtaxg3rlk",
+                  "host": ["{{base_url}}"],
+                  "path": ["api", "products", "cmsj4pxbt0000qglwtaxg3rlk"]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": false,\n  \"statusCode\": 400,\n  \"message\": \"Validation failed\",\n  \"errors\": {\n    \"fieldErrors\": {\n      \"price\": [\"Price must be greater than zero\"]\n    }\n  }\n}"
+            },
+            {
+              "name": "Example - 401 Unauthorized (Invalid Bearer Token)",
+              "originalRequest": {
+                "method": "PUT",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/api/products/cmsj4pxbt0000qglwtaxg3rlk",
+                  "host": ["{{base_url}}"],
+                  "path": ["api", "products", "cmsj4pxbt0000qglwtaxg3rlk"]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": false,\n  \"statusCode\": 401,\n  \"message\": \"Authorization token required\"\n}"
+            },
+            {
+              "name": "Example - 403 Forbidden (Forbidden: You do not have permission.)",
+              "originalRequest": {
+                "method": "PUT",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/api/products/cmsj4pxbt0000qglwtaxg3rlk",
+                  "host": ["{{base_url}}"],
+                  "path": ["api", "products", "cmsj4pxbt0000qglwtaxg3rlk"]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": false,\n  \"statusCode\": 403,\n  \"message\": \"Forbidden: You do not have permission.\"\n}"
+            },
+            {
+              "name": "Example - 404 Not Found (Product Not Found)",
+              "originalRequest": {
+                "method": "PUT",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/api/products/non-existent-id",
+                  "host": ["{{base_url}}"],
+                  "path": ["api", "products", "non-existent-id"]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": false,\n  \"statusCode\": 404,\n  \"message\": \"Product not found\"\n}"
+            },
+            {
+              "name": "Example - 500 Internal Server Error (Database Error)",
+              "originalRequest": {
+                "method": "PUT",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/api/products/cmsj4pxbt0000qglwtaxg3rlk",
+                  "host": ["{{base_url}}"],
+                  "path": ["api", "products", "cmsj4pxbt0000qglwtaxg3rlk"]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": false,\n  \"statusCode\": 500,\n  \"message\": \"Internal server error\"\n}"
             }
           ]
         },
         {
-          "name": "Delete Product",
+          "name": "Delete Product (Soft Delete)",
           "request": {
             "auth": {
               "type": "bearer",
@@ -600,23 +1287,23 @@
               "variable": [
                 {
                   "key": "id",
-                  "value": "clx_prod_01",
+                  "value": "cmsj4pxbt0000qglwtaxg3rlk",
                   "description": "ID produk"
                 }
               ]
             },
-            "description": "Menghapus produk secara soft delete."
+            "description": "Menghapus produk secara soft delete (isDeleted = true & deletedAt = new Date()). HANYA BISA DIAKSES OLEH ROLE ADMIN."
           },
           "response": [
             {
-              "name": "Example - Delete Product Success (200 OK)",
+              "name": "Example - 200 OK (Delete Product Soft Delete Success)",
               "originalRequest": {
                 "method": "DELETE",
                 "header": [],
                 "url": {
-                  "raw": "{{base_url}}/api/products/clx_prod_01",
+                  "raw": "{{base_url}}/api/products/cmsj4pxbt0000qglwtaxg3rlk",
                   "host": ["{{base_url}}"],
-                  "path": ["api", "products", "clx_prod_01"]
+                  "path": ["api", "products", "cmsj4pxbt0000qglwtaxg3rlk"]
                 }
               },
               "status": "OK",
@@ -629,7 +1316,99 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"message\": \"Product deleted successfully\"\n}"
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Product deleted successfully\"\n}"
+            },
+            {
+              "name": "Example - 401 Unauthorized (Missing Bearer Token)",
+              "originalRequest": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/api/products/cmsj4pxbt0000qglwtaxg3rlk",
+                  "host": ["{{base_url}}"],
+                  "path": ["api", "products", "cmsj4pxbt0000qglwtaxg3rlk"]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": false,\n  \"statusCode\": 401,\n  \"message\": \"Authorization token required\"\n}"
+            },
+            {
+              "name": "Example - 403 Forbidden (Forbidden: You do not have permission.)",
+              "originalRequest": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/api/products/cmsj4pxbt0000qglwtaxg3rlk",
+                  "host": ["{{base_url}}"],
+                  "path": ["api", "products", "cmsj4pxbt0000qglwtaxg3rlk"]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": false,\n  \"statusCode\": 403,\n  \"message\": \"Forbidden: You do not have permission.\"\n}"
+            },
+            {
+              "name": "Example - 404 Not Found (Product Already Deleted or Missing)",
+              "originalRequest": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/api/products/non-existent-id",
+                  "host": ["{{base_url}}"],
+                  "path": ["api", "products", "non-existent-id"]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": false,\n  \"statusCode\": 404,\n  \"message\": \"Product not found\"\n}"
+            },
+            {
+              "name": "Example - 500 Internal Server Error (Database Error)",
+              "originalRequest": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/api/products/cmsj4pxbt0000qglwtaxg3rlk",
+                  "host": ["{{base_url}}"],
+                  "path": ["api", "products", "cmsj4pxbt0000qglwtaxg3rlk"]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": false,\n  \"statusCode\": 500,\n  \"message\": \"Internal server error\"\n}"
             }
           ]
         }
@@ -661,7 +1440,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"items\": [\n    {\n      \"productId\": \"clx_prod_01\",\n      \"quantity\": 2\n    }\n  ]\n}"
+              "raw": "{\n  \"items\": [\n    {\n      \"productId\": \"cmsj4pxbt0000qglwtaxg3rlk\",\n      \"quantity\": 2\n    }\n  ]\n}"
             },
             "url": {
               "raw": "{{base_url}}/api/orders",
@@ -672,7 +1451,7 @@
           },
           "response": [
             {
-              "name": "Example - Create Order Success (201 Created)",
+              "name": "Example - 201 Created (Order Created Success)",
               "originalRequest": {
                 "method": "POST",
                 "header": [],
@@ -692,7 +1471,176 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"message\": \"Order created successfully\",\n  \"data\": {\n    \"id\": \"clx_order_01\",\n    \"totalAmount\": 44000000,\n    \"status\": \"PENDING\"\n  }\n}"
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 201,\n  \"message\": \"Order created successfully\",\n  \"data\": {\n    \"id\": \"clx_order_01\",\n    \"totalAmount\": 44000000,\n    \"status\": \"PENDING\"\n  }\n}"
+            },
+            {
+              "name": "Example - 201 Created (Encrypted Payload Mode)",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "X-Client-Key",
+                    "value": "CLIENT_SOLUTECH_DEV_01"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"encryptedKey\": \"xDP/WvXoXNgHGK9Ymv92rFpgviV6gy5xEnMHoF138UvU/beszRqDrmqBk1D8Gwkc3U5JzhDbXxn5IwjQiWYZU6JGj7Y5Va7Fb1jS2dfoDMF3ZJNZdYZrI/u0BV2yeAH045RApF4qc9ro81D0aVlE/XxkhxmQCsUSr43bIh1jJQo/8Q3707wmF9QHi2W7sBGdfsNGXUuq8bdMbZoehc1PTv2dVevfFT8K48Q0tx+MkPBGJE5gYN6Cw5x0ea7LnKNhkntr+kqyEfdE1rA/HaXmdTMrIgQn1qbcJPfDw+/b3Fn30QqAj4fo/EfES1d4gaOFCdkhdK+G6+XqO5H2DiQrzg==\",\n  \"ciphertext\": \"klLQ3zMXghF10i4x0diZ0yz38IMLqY/AOYQTm8bIuvVHJJKL2NFdw9kTxsWNjAj73og=\",\n  \"iv\": \"WewDA3OQnk0daeXX\",\n  \"authTag\": \"drERRwEfCz4H3Aw9dAuY3A==\"\n}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/orders",
+                  "host": ["{{base_url}}"],
+                  "path": ["api", "orders"]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"encryptedKey\": \"ygJJkjKYAyl738WZBYfhysEbKL4S8jrN+W2ijBGvwTc80n2i02czPi+VvXHuObrMg5CXjS5lm5BW0tp+gJbBLM7zy0jSGz2LrMyBTSA+YOYCbL9Xo7UGIUpJLqHgu4MCU6TdNF+dqNbOTp/+1vYK4JaaOzKtEQE3CJEDOQWz/lhZVEFISvSz4L1M91f1Ks7yLLhe7Gyf8utwZUlc/15Ikn7E4QiBW7zWc8TCTh/hzBDp4Oshqja/KFl1MeSzEb8V8m2JzCf+xU98FSFeofKgoi5bIMZTF1YV3mgnwvTUHWzdfjnW2g5PL9Ki+m9p5ATAxE5VVeCirbI22+MhBf173A==\",\n  \"ciphertext\": \"vhRCSbcR0Cr2Vf7LJhTn6OdoDPFJkHpA4eV2/uzURN2SQmDENkYuInOdi2qgVTL9vts=\",\n  \"iv\": \"mgUna3ATB6dXQqbC\",\n  \"authTag\": \"i/xhkS/VnQGMk55dzWAVTg==\"\n}"
+            },
+            {
+              "name": "Example - 400 Bad Request (Insufficient Stock)",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"items\": [\n    {\n      \"productId\": \"cmsj4pxbt0000qglwtaxg3rlk\",\n      \"quantity\": 99999\n    }\n  ]\n}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/orders",
+                  "host": ["{{base_url}}"],
+                  "path": ["api", "orders"]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": false,\n  \"statusCode\": 400,\n  \"message\": \"Insufficient stock for product Mechanical Keyboard RGB\"\n}"
+            },
+            {
+              "name": "Example - 401 Unauthorized (Invalid Bearer Token)",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/api/orders",
+                  "host": ["{{base_url}}"],
+                  "path": ["api", "orders"]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": false,\n  \"statusCode\": 401,\n  \"message\": \"Authorization token required\"\n}"
+            },
+            {
+              "name": "Example - 402 Payment Required (Payment Transaction Required)",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"items\": [\n    {\n      \"productId\": \"cmsj4pxbt0000qglwtaxg3rlk\",\n      \"quantity\": 1\n    }\n  ]\n}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/orders",
+                  "host": ["{{base_url}}"],
+                  "path": ["api", "orders"]
+                }
+              },
+              "status": "Payment Required",
+              "code": 402,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": false,\n  \"statusCode\": 402,\n  \"message\": \"Payment transaction required to complete order.\"\n}"
+            },
+            {
+              "name": "Example - 403 Forbidden (Forbidden: You do not have permission.)",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/api/orders",
+                  "host": ["{{base_url}}"],
+                  "path": ["api", "orders"]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": false,\n  \"statusCode\": 403,\n  \"message\": \"Forbidden: You do not have permission.\"\n}"
+            },
+            {
+              "name": "Example - 500 Internal Server Error (Transaction Rollback)",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/api/orders",
+                  "host": ["{{base_url}}"],
+                  "path": ["api", "orders"]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": false,\n  \"statusCode\": 500,\n  \"message\": \"Internal server error\"\n}"
             }
           ]
         },
@@ -727,7 +1675,7 @@
           },
           "response": [
             {
-              "name": "Example - Order Detail Success (200 OK)",
+              "name": "Example - 200 OK (Order Detail Success)",
               "originalRequest": {
                 "method": "GET",
                 "header": [],
@@ -747,7 +1695,99 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"message\": \"Order retrieved successfully\",\n  \"data\": {\n    \"id\": \"clx_order_01\",\n    \"totalAmount\": 44000000,\n    \"status\": \"PENDING\"\n  }\n}"
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Order retrieved successfully\",\n  \"data\": {\n    \"id\": \"clx_order_01\",\n    \"totalAmount\": 44000000,\n    \"status\": \"PENDING\"\n  }\n}"
+            },
+            {
+              "name": "Example - 401 Unauthorized (Missing Bearer Token)",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/api/orders/clx_order_01",
+                  "host": ["{{base_url}}"],
+                  "path": ["api", "orders", "clx_order_01"]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": false,\n  \"statusCode\": 401,\n  \"message\": \"Authorization token required\"\n}"
+            },
+            {
+              "name": "Example - 403 Forbidden (Forbidden: You do not have permission.)",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/api/orders/clx_order_01",
+                  "host": ["{{base_url}}"],
+                  "path": ["api", "orders", "clx_order_01"]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": false,\n  \"statusCode\": 403,\n  \"message\": \"Forbidden: You do not have permission.\"\n}"
+            },
+            {
+              "name": "Example - 404 Not Found (Order Not Found)",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/api/orders/non-existent-order",
+                  "host": ["{{base_url}}"],
+                  "path": ["api", "orders", "non-existent-order"]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": false,\n  \"statusCode\": 404,\n  \"message\": \"Order not found\"\n}"
+            },
+            {
+              "name": "Example - 500 Internal Server Error (Database Error)",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/api/orders/clx_order_01",
+                  "host": ["{{base_url}}"],
+                  "path": ["api", "orders", "clx_order_01"]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": false,\n  \"statusCode\": 500,\n  \"message\": \"Internal server error\"\n}"
             }
           ]
         }

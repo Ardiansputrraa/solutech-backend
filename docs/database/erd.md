@@ -90,6 +90,7 @@ erDiagram
         Decimal  price           "Harga (DECIMAL 10,2) — gunakan Decimal bukan Float"
         Int      stock           "Jumlah stok tersedia — tidak boleh negatif"
         String   description     "Nullable — deskripsi produk"
+        Boolean  is_deleted      "Flag status soft delete — default false, true = terhapus"
         DateTime created_at      "Timestamp dibuat"
         DateTime updated_at      "Timestamp diperbarui (auto)"
         DateTime deleted_at      "Nullable — diisi saat soft delete, NULL = aktif"
@@ -105,10 +106,11 @@ erDiagram
 | `price` | `Decimal(10,2)` | `NOT NULL, > 0` | Decimal menghindari floating point error (hindari `Float`!) |
 | `stock` | `Int` | `NOT NULL, >= 0` | Tidak boleh negatif — divalidasi di service layer |
 | `description` | `String?` | `NULL allowed` | Opsional |
-| `deleted_at` | `DateTime?` | `NULL = aktif` | **Soft delete**: record tidak pernah dihapus permanen |
+| `is_deleted` | `Boolean` | `NOT NULL, default false` | **Flag status soft delete**: `false` = aktif, `true` = terhapus |
+| `deleted_at` | `DateTime?` | `NULL = aktif` | **Timestamp soft delete**: Waktu produk dihapus |
 
-> **Soft Delete Rule**: Setiap query `SELECT` pada `products` **WAJIB** menyertakan `WHERE deleted_at IS NULL`.
-> Record dengan `deleted_at IS NOT NULL` dianggap "terhapus" dan tidak boleh muncul di API response.
+> **Soft Delete Rule**: Setiap query `SELECT` pada `products` **WAJIB** menyertakan `WHERE is_deleted = false AND deleted_at IS NULL`.
+> Record dengan `is_deleted = true` / `deleted_at IS NOT NULL` dianggap "terhapus" dan tidak boleh muncul di API response.
 
 ---
 

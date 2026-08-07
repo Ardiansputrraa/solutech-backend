@@ -1,13 +1,164 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
-// Get a free hosted Postgres database in seconds: `npx create-db`
-
 generator client {
-  provider = "prisma-client"
+  provider = "prisma-client-js"
   output   = "../src/generated/prisma"
 }
 
 datasource db {
   provider = "postgresql"
+  schemas  = ["master", "product", "transaction"]
+}
+
+// =============================================================================
+// MASTER SCHEMA
+// Mengelola identitas pengguna, hak akses, dan registrasi API client.
+// =============================================================================
+
+/// Hak akses pengguna dalam sistem.
+/// ADMIN: akses penuh (CRUD product, lihat semua order).
+/// USER: akses terbatas (hanya buat dan lihat order sendiri).
+model Role {
+  id          String   @id @default(cuid())
+  name        RoleName @unique
+  description String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  users User[]
+
+  @@schema("master")
+  @@map("roles")
+}
+
+/// Akun pengguna sistem.
+/// Field `password` menyimpan bcrypt hash — BUKAN plain text.
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  name      String
+  roleId    String
+  role      Role     @relation(fields: [roleId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  orders Order[]
+
+  @@index([email])
+  @@schema("master")
+  @@map("users")
+}
+
+/// Registrasi aplikasi client yang diizinkan mengakses API dengan enkripsi payload.
+/// Aktif hanya jika ENCRYPTION_ENABLED=true.
+/// Gunakan `revokedAt` untuk menonaktifkan client — jangan hapus record.
+model ApiClient {
+  id        String    @id @default(cuid())
+  name      String
+  clientKey String    @unique
+  /// RSA Public Key milik client (format PEM).
+  /// Server menggunakannya untuk mengenkripsi response ke client ini.
+  publicKey String    @db.Text
+  isActive  Boolean   @default(true)
+  revokedAt DateTime?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  @@schema("master")
+  @@map("api_clients")
+}
+
+// =============================================================================
+// PRODUCT SCHEMA
+// Mengelola katalog produk yang dijual, termasuk stok dan soft delete.
+// =============================================================================
+
+/// Produk yang tersedia di toko.
+/// Soft delete: record tidak dihapus permanen. `deletedAt` diisi saat "dihapus".
+/// SELALU filter `WHERE deletedAt IS NULL` pada setiap query read.
+model Product {
+  id          String    @id @default(cuid())
+  name        String
+  /// Gunakan Decimal untuk nilai uang — menghindari floating point error.
+  price       Decimal   @db.Decimal(10, 2)
+  /// Tidak boleh negatif. Divalidasi di service layer sebelum disimpan.
+  stock       Int       @default(0)
+  description String?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  /// Soft delete: NULL = produk aktif, terisi = produk "terhapus".
+  deletedAt   DateTime?
+
+  orderItems OrderItem[]
+
+  @@index([name])
+  @@index([deletedAt])
+  @@schema("product")
+  @@map("products")
+}
+
+// =============================================================================
+// TRANSACTION SCHEMA
+// Mengelola pembuatan order dan item-itemnya.
+// Semua operasi tulis HARUS dalam prisma.$transaction.
+// =============================================================================
+
+/// Header order yang dibuat oleh user.
+/// `totalPrice` dihitung dan di-snapshot saat order dibuat.
+model Order {
+  id         String      @id @default(cuid())
+  userId     String
+  user       User        @relation(fields: [userId], references: [id])
+  /// Total harga di-snapshot saat order dibuat agar tidak berubah
+  /// jika harga produk diupdate di kemudian hari.
+  totalPrice Decimal     @db.Decimal(10, 2)
+  status     OrderStatus @default(PENDING)
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime    @updatedAt
+
+  items OrderItem[]
+
+  @@index([userId])
+  @@schema("transaction")
+  @@map("orders")
+}
+
+/// Baris item dalam sebuah order.
+/// `unitPrice` adalah snapshot harga produk SAAT ORDER DIBUAT,
+/// bukan harga produk saat ini. Ini penting untuk integritas data keuangan historis.
+model OrderItem {
+  id        String  @id @default(cuid())
+  orderId   String
+  order     Order   @relation(fields: [orderId], references: [id])
+  productId String
+  product   Product @relation(fields: [productId], references: [id])
+  quantity  Int
+  /// Snapshot harga satuan saat transaksi — tidak berubah meski harga produk berubah.
+  unitPrice Decimal @db.Decimal(10, 2)
+
+  @@index([orderId])
+  @@index([productId])
+  @@schema("transaction")
+  @@map("order_items")
+}
+
+// =============================================================================
+// ENUMS
+// =============================================================================
+
+enum RoleName {
+  ADMIN
+  USER
+
+  @@schema("master")
+}
+
+enum OrderStatus {
+  PENDING
+  CONFIRMED
+  CANCELLED
+
+  @@schema("transaction")
 }

@@ -257,9 +257,9 @@ npm test
 
 | Modul / Komponen | Deskripsi Pekerjaan | Estimasi Waktu |
 | :--- | :--- | :---: |
-| **Modul 1: Architecture & DB Setup** | Inisialisasi Next.js, Docker Compose, Prisma ORM, Multi-schema PostgreSQL DDL, & Seeder | 1 Jam |
-| **Modul 2: Auth & Security Middleware** | Autentikasi JWT, Role Permission, & Hybrid RSA+AES Cryptography Middleware | 2 Jam |
-| **Modul 3: Product & Redis Caching** | CRUD Produk, Soft Delete, Pagination, Redis SCAN Stream Caching & Invalidation | 1 Jam |
+| **Modul 1: Architecture & DB Setup** | Inisialisasi Next.js, Docker Compose, Prisma ORM, Multi-schema PostgreSQL DDL, & Seeder | 2 Jam |
+| **Modul 2: Auth & Security Middleware** | Autentikasi JWT, Role Permission, & Hybrid RSA+AES Cryptography Middleware | 3 Jam |
+| **Modul 3: Product & Redis Caching** | CRUD Produk, Soft Delete, Pagination, Redis SCAN Stream Caching & Invalidation | 3 Jam |
 | **Modul 4: Order Transaction Module** | Atomic DB Transaction (`prisma.$transaction`), Stock Decrement, RBAC Ownership Filtering | 2 Jam |
 | **Modul 5: Testing & Documentation** | Jest Unit Tests (35 tests), Master Postman Collection, & Technical README | 1 Jam |
-| **TOTAL WAKTU PENGERJAAN** | | **7 Jam** |
+| **TOTAL WAKTU PENGERJAAN** | | **11 Jam** |

@@ -1,152 +1,123 @@
+/**
+ * product.service.ts
+ *
+ * Business logic layer untuk modul Product.
+ * Bertanggung jawab atas: orchestrasi repository, cache, dan validasi bisnis.
+ */
+
 import { productRepository } from "./product.repository";
 import { type CreateProductInput, type UpdateProductInput, type ProductQueryInput } from "./product.schema";
+import { type ProductDTO, type ProductListResult } from "./product.types";
+import { CACHE_TTL, buildListCacheKey, buildDetailCacheKey, invalidateProductCache } from "./product.cache";
 import { AppError } from "@/lib/errors/AppError";
-import { getCache, setCache, delCache, delCachePattern } from "@/lib/redis";
+import { getCache, setCache } from "@/lib/redis";
 import logger from "@/lib/logger";
-
-const CACHE_TTL = {
-  LIST: 300, // 5 menit
-  DETAIL: 600, // 10 menit
-};
-
-/**
- * Helper untuk menghapus cache list & detail produk saat ada perubahan data (mutasi).
- */
-async function invalidateProductCache(productId?: string) {
-  try {
-    await delCachePattern("products:list:*");
-    if (productId) {
-      await delCache(`products:detail:${productId}`);
-    }
-  } catch (error) {
-    logger.warn({ error, productId }, "Failed to invalidate product cache");
-  }
-}
 
 export const productService = {
   /**
    * Ambil daftar produk aktif dengan pagination dan pencarian.
-   * Menggunakan Redis Cache (Key: products:list:page:X:limit:Y:search:Z).
+   *
+   * Strategi: Cache-Aside Pattern
+   *   1. Cek Redis — jika HIT, return langsung (tidak query DB)
+   *   2. Jika MISS, query DB, format hasilnya, lalu simpan ke Redis (TTL: 5 menit)
    */
-  async getProducts(query: ProductQueryInput) {
-    const cacheKey = `products:list:page:${query.page}:limit:${query.limit}:search:${query.search || ""}`;
+  async getProducts(query: ProductQueryInput): Promise<ProductListResult> {
+    const cacheKey = buildListCacheKey(query);
 
-    // 1. Cek Redis Cache
-    const cachedData = await getCache<ReturnType<typeof formatProductsResult>>(cacheKey);
-    if (cachedData) {
-      logger.debug({ cacheKey }, "Redis Cache HIT: getProducts");
-      return cachedData;
+    const cached = await getCache<ProductListResult>(cacheKey);
+    if (cached) {
+      logger.debug({ cacheKey }, "Cache HIT: getProducts");
+      return cached;
     }
 
-    logger.debug({ cacheKey }, "Redis Cache MISS: getProducts");
+    logger.debug({ cacheKey }, "Cache MISS: getProducts");
 
-    // 2. Query ke Database jika Cache MISS
     const [products, total] = await Promise.all([
       productRepository.findMany(query),
       productRepository.countMany(query.search),
     ]);
 
-    const totalPages = Math.ceil(total / query.limit);
-
-    // Format Decimal price ke number untuk response DTO
-    const formattedProducts = products.map((p) => ({
-      ...p,
-      price: p.price.toNumber(),
-    }));
-
-    const result = {
-      products: formattedProducts,
+    const result: ProductListResult = {
+      products: products.map((p) => ({ ...p, price: p.price.toNumber() })),
       pagination: {
         total,
         page: query.page,
         limit: query.limit,
-        totalPages,
+        totalPages: Math.ceil(total / query.limit),
       },
     };
 
-    // 3. Simpan ke Redis Cache (TTL 5 menit)
     await setCache(cacheKey, result, CACHE_TTL.LIST);
 
     return result;
   },
 
   /**
-   * Ambil detail 1 produk aktif berdasarkan ID.
-   * Menggunakan Redis Cache (Key: products:detail:ID).
+   * Ambil detail satu produk aktif berdasarkan ID.
+   *
+   * Strategi: Cache-Aside Pattern
+   *   1. Cek Redis — jika HIT, return langsung
+   *   2. Jika MISS, query DB, format, lalu simpan ke Redis (TTL: 10 menit)
+   *   3. Jika produk tidak ditemukan, lempar AppError 404
    */
-  async getProductById(id: string) {
-    const cacheKey = `products:detail:${id}`;
+  async getProductById(id: string): Promise<ProductDTO> {
+    const cacheKey = buildDetailCacheKey(id);
 
-    // 1. Cek Redis Cache
-    const cachedData = await getCache<Record<string, unknown>>(cacheKey);
-    if (cachedData) {
-      logger.debug({ id }, "Redis Cache HIT: getProductById");
-      return cachedData;
+    const cached = await getCache<ProductDTO>(cacheKey);
+    if (cached) {
+      logger.debug({ id }, "Cache HIT: getProductById");
+      return cached;
     }
 
-    logger.debug({ id }, "Redis Cache MISS: getProductById");
+    logger.debug({ id }, "Cache MISS: getProductById");
 
-    // 2. Query ke Database
     const product = await productRepository.findById(id);
     if (!product) {
       throw new AppError("Product not found", 404);
     }
 
-    const formattedProduct = {
-      ...product,
-      price: product.price.toNumber(),
-    };
+    const result: ProductDTO = { ...product, price: product.price.toNumber() };
 
-    // 3. Simpan ke Redis Cache (TTL 10 menit)
-    await setCache(cacheKey, formattedProduct, CACHE_TTL.DETAIL);
+    await setCache(cacheKey, result, CACHE_TTL.DETAIL);
 
-    return formattedProduct;
+    return result;
   },
 
   /**
-   * Buat produk baru.
-   * Melakukan cache invalidation untuk list produk (`products:list:*`).
+   * Buat produk baru, lalu invalidasi semua list cache.
    */
-  async createProduct(input: CreateProductInput) {
+  async createProduct(input: CreateProductInput): Promise<ProductDTO> {
     const product = await productRepository.create(input);
-    const result = {
-      ...product,
-      price: product.price.toNumber(),
-    };
+    const result: ProductDTO = { ...product, price: product.price.toNumber() };
 
-    // Invalidate Redis list cache
     await invalidateProductCache();
 
     return result;
   },
 
   /**
-   * Update produk.
-   * Melakukan cache invalidation untuk detail & list produk.
+   * Update produk berdasarkan ID.
+   * Invalidasi list cache + detail cache produk yang diubah.
    */
-  async updateProduct(id: string, input: UpdateProductInput) {
+  async updateProduct(id: string, input: UpdateProductInput): Promise<ProductDTO> {
     const existing = await productRepository.findById(id);
     if (!existing) {
       throw new AppError("Product not found", 404);
     }
 
     const updated = await productRepository.update(id, input);
-    const result = {
-      ...updated,
-      price: updated.price.toNumber(),
-    };
+    const result: ProductDTO = { ...updated, price: updated.price.toNumber() };
 
-    // Invalidate Redis detail & list cache
     await invalidateProductCache(id);
 
     return result;
   },
 
   /**
-   * Soft delete produk (isDeleted = true & deletedAt = now).
-   * Melakukan cache invalidation untuk detail & list produk.
+   * Soft delete produk (set isDeleted = true, deletedAt = now).
+   * Invalidasi list cache + detail cache produk yang dihapus.
    */
-  async deleteProduct(id: string) {
+  async deleteProduct(id: string): Promise<{ id: string; isDeleted: true }> {
     const existing = await productRepository.findById(id);
     if (!existing) {
       throw new AppError("Product not found", 404);
@@ -154,17 +125,8 @@ export const productService = {
 
     await productRepository.softDelete(id);
 
-    // Invalidate Redis detail & list cache
     await invalidateProductCache(id);
 
     return { id, isDeleted: true };
   },
 };
-
-// Helper type untuk typescript inference internal
-function formatProductsResult() {
-  return {
-    products: [] as Array<Record<string, unknown>>,
-    pagination: { total: 0, page: 1, limit: 10, totalPages: 0 },
-  };
-}

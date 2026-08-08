@@ -118,6 +118,11 @@ export const productService = {
       ...product,
       price: product.price.toNumber(),
     };
+
+    // Invalidate Redis list cache
+    await invalidateProductCache();
+
+    return result;
   },
 
   /**
@@ -142,6 +147,11 @@ export const productService = {
       ...updated,
       price: updated.price.toNumber(),
     };
+
+    // Invalidate Redis detail & list cache
+    await invalidateProductCache(id);
+
+    return result;
   },
 
   /**

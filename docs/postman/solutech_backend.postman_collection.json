@@ -60,8 +60,14 @@
             },
             "url": {
               "raw": "{{base_url}}/api/auth/login",
-              "host": ["{{base_url}}"],
-              "path": ["api", "auth", "login"]
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "login"
+              ]
             },
             "description": "Request Login tunggal untuk autentikasi user. Token JWT otomatis tersimpan di variable jwt_token saat response HTTP 200 OK."
           },
@@ -82,8 +88,14 @@
                 },
                 "url": {
                   "raw": "{{base_url}}/api/auth/login",
-                  "host": ["{{base_url}}"],
-                  "path": ["api", "auth", "login"]
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "auth",
+                    "login"
+                  ]
                 }
               },
               "status": "OK",
@@ -110,12 +122,18 @@
                 ],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"email\": \"user@solutech.id\",\n  \"password\": \"User@123\"\n}"
+                  "raw": "{\n  \"email\": \"user_a@solutech.id\",\n  \"password\": \"User@123\"\n}"
                 },
                 "url": {
                   "raw": "{{base_url}}/api/auth/login",
-                  "host": ["{{base_url}}"],
-                  "path": ["api", "auth", "login"]
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "auth",
+                    "login"
+                  ]
                 }
               },
               "status": "OK",
@@ -128,7 +146,7 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Login successful\",\n  \"data\": {\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...\",\n    \"user\": {\n      \"id\": \"cmsj0l6vc0003fslw2f3dwnjt\",\n      \"email\": \"user@solutech.id\",\n      \"name\": \"User Demo\",\n      \"role\": \"USER\"\n    }\n  }\n}"
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Login successful\",\n  \"data\": {\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...\",\n    \"user\": {\n      \"id\": \"cmsj0l6vc0003fslw2f3dwnjt\",\n      \"email\": \"user_a@solutech.id\",\n      \"name\": \"User Demo\",\n      \"role\": \"USER\"\n    }\n  }\n}"
             },
             {
               "name": "Example - 200 OK (Encrypted Payload Mode)",
@@ -150,8 +168,14 @@
                 },
                 "url": {
                   "raw": "{{base_url}}/api/auth/login",
-                  "host": ["{{base_url}}"],
-                  "path": ["api", "auth", "login"]
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "auth",
+                    "login"
+                  ]
                 }
               },
               "status": "OK",
@@ -182,8 +206,14 @@
                 },
                 "url": {
                   "raw": "{{base_url}}/api/auth/login",
-                  "host": ["{{base_url}}"],
-                  "path": ["api", "auth", "login"]
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "auth",
+                    "login"
+                  ]
                 }
               },
               "status": "Bad Request",
@@ -214,8 +244,14 @@
                 },
                 "url": {
                   "raw": "{{base_url}}/api/auth/login",
-                  "host": ["{{base_url}}"],
-                  "path": ["api", "auth", "login"]
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "auth",
+                    "login"
+                  ]
                 }
               },
               "status": "Internal Server Error",
@@ -258,8 +294,14 @@
             },
             "url": {
               "raw": "{{base_url}}/api/dev/encrypt",
-              "host": ["{{base_url}}"],
-              "path": ["api", "dev", "encrypt"]
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "dev",
+                "encrypt"
+              ]
             },
             "description": "Mengubah Plain JSON payload biasa menjadi format payload terenkripsi ({ encryptedKey, ciphertext, iv, authTag }) secara langsung."
           },
@@ -284,8 +326,14 @@
                 },
                 "url": {
                   "raw": "{{base_url}}/api/dev/encrypt",
-                  "host": ["{{base_url}}"],
-                  "path": ["api", "dev", "encrypt"]
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "dev",
+                    "encrypt"
+                  ]
                 }
               },
               "status": "OK",
@@ -316,8 +364,14 @@
                 },
                 "url": {
                   "raw": "{{base_url}}/api/dev/encrypt",
-                  "host": ["{{base_url}}"],
-                  "path": ["api", "dev", "encrypt"]
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "dev",
+                    "encrypt"
+                  ]
                 }
               },
               "status": "Bad Request",
@@ -348,8 +402,14 @@
                 },
                 "url": {
                   "raw": "{{base_url}}/api/dev/encrypt",
-                  "host": ["{{base_url}}"],
-                  "path": ["api", "dev", "encrypt"]
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "dev",
+                    "encrypt"
+                  ]
                 }
               },
               "status": "Internal Server Error",
@@ -382,8 +442,14 @@
             },
             "url": {
               "raw": "{{base_url}}/api/dev/decrypt",
-              "host": ["{{base_url}}"],
-              "path": ["api", "dev", "decrypt"]
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "dev",
+                "decrypt"
+              ]
             },
             "description": "Mendekripsi payload terenkripsi ({ encryptedKey, ciphertext, iv, authTag }) kembali menjadi Plain JSON asli."
           },
@@ -404,8 +470,14 @@
                 },
                 "url": {
                   "raw": "{{base_url}}/api/dev/decrypt",
-                  "host": ["{{base_url}}"],
-                  "path": ["api", "dev", "decrypt"]
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "dev",
+                    "decrypt"
+                  ]
                 }
               },
               "status": "OK",
@@ -436,8 +508,14 @@
                 },
                 "url": {
                   "raw": "{{base_url}}/api/dev/decrypt",
-                  "host": ["{{base_url}}"],
-                  "path": ["api", "dev", "decrypt"]
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "dev",
+                    "decrypt"
+                  ]
                 }
               },
               "status": "Bad Request",
@@ -477,8 +555,13 @@
             "header": [],
             "url": {
               "raw": "{{base_url}}/api/products?page=1&limit=10&search=laptop",
-              "host": ["{{base_url}}"],
-              "path": ["api", "products"],
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "products"
+              ],
               "query": [
                 {
                   "key": "page",
@@ -507,8 +590,13 @@
                 "header": [],
                 "url": {
                   "raw": "{{base_url}}/api/products?page=1&limit=10",
-                  "host": ["{{base_url}}"],
-                  "path": ["api", "products"]
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "products"
+                  ]
                 }
               },
               "status": "OK",
@@ -535,8 +623,13 @@
                 ],
                 "url": {
                   "raw": "{{base_url}}/api/products?page=1&limit=10",
-                  "host": ["{{base_url}}"],
-                  "path": ["api", "products"]
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "products"
+                  ]
                 }
               },
               "status": "OK",
@@ -558,8 +651,13 @@
                 "header": [],
                 "url": {
                   "raw": "{{base_url}}/api/products?page=abc&limit=-5",
-                  "host": ["{{base_url}}"],
-                  "path": ["api", "products"]
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "products"
+                  ]
                 }
               },
               "status": "Bad Request",
@@ -581,8 +679,13 @@
                 "header": [],
                 "url": {
                   "raw": "{{base_url}}/api/products",
-                  "host": ["{{base_url}}"],
-                  "path": ["api", "products"]
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "products"
+                  ]
                 }
               },
               "status": "Unauthorized",
@@ -604,8 +707,13 @@
                 "header": [],
                 "url": {
                   "raw": "{{base_url}}/api/products",
-                  "host": ["{{base_url}}"],
-                  "path": ["api", "products"]
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "products"
+                  ]
                 }
               },
               "status": "Forbidden",
@@ -627,8 +735,13 @@
                 "header": [],
                 "url": {
                   "raw": "{{base_url}}/api/products",
-                  "host": ["{{base_url}}"],
-                  "path": ["api", "products"]
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "products"
+                  ]
                 }
               },
               "status": "Internal Server Error",
@@ -671,8 +784,13 @@
             },
             "url": {
               "raw": "{{base_url}}/api/products",
-              "host": ["{{base_url}}"],
-              "path": ["api", "products"]
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "products"
+              ]
             },
             "description": "Membuat produk baru. HANYA BISA DIAKSES OLEH ROLE ADMIN."
           },
@@ -693,8 +811,13 @@
                 },
                 "url": {
                   "raw": "{{base_url}}/api/products",
-                  "host": ["{{base_url}}"],
-                  "path": ["api", "products"]
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "products"
+                  ]
                 }
               },
               "status": "Created",
@@ -729,8 +852,13 @@
                 },
                 "url": {
                   "raw": "{{base_url}}/api/products",
-                  "host": ["{{base_url}}"],
-                  "path": ["api", "products"]
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "products"
+                  ]
                 }
               },
               "status": "Created",
@@ -761,8 +889,13 @@
                 },
                 "url": {
                   "raw": "{{base_url}}/api/products",
-                  "host": ["{{base_url}}"],
-                  "path": ["api", "products"]
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "products"
+                  ]
                 }
               },
               "status": "Bad Request",
@@ -784,8 +917,13 @@
                 "header": [],
                 "url": {
                   "raw": "{{base_url}}/api/products",
-                  "host": ["{{base_url}}"],
-                  "path": ["api", "products"]
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "products"
+                  ]
                 }
               },
               "status": "Unauthorized",
@@ -816,8 +954,13 @@
                 },
                 "url": {
                   "raw": "{{base_url}}/api/products",
-                  "host": ["{{base_url}}"],
-                  "path": ["api", "products"]
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "products"
+                  ]
                 }
               },
               "status": "Forbidden",
@@ -848,8 +991,13 @@
                 },
                 "url": {
                   "raw": "{{base_url}}/api/products",
-                  "host": ["{{base_url}}"],
-                  "path": ["api", "products"]
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "products"
+                  ]
                 }
               },
               "status": "Internal Server Error",
@@ -883,8 +1031,14 @@
             "header": [],
             "url": {
               "raw": "{{base_url}}/api/products/:id",
-              "host": ["{{base_url}}"],
-              "path": ["api", "products", ":id"],
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "products",
+                ":id"
+              ],
               "variable": [
                 {
                   "key": "id",
@@ -903,8 +1057,14 @@
                 "header": [],
                 "url": {
                   "raw": "{{base_url}}/api/products/cmsj4pxbt0000qglwtaxg3rlk",
-                  "host": ["{{base_url}}"],
-                  "path": ["api", "products", "cmsj4pxbt0000qglwtaxg3rlk"]
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "products",
+                    "cmsj4pxbt0000qglwtaxg3rlk"
+                  ]
                 }
               },
               "status": "OK",
@@ -931,8 +1091,14 @@
                 ],
                 "url": {
                   "raw": "{{base_url}}/api/products/cmsj4pxbt0000qglwtaxg3rlk",
-                  "host": ["{{base_url}}"],
-                  "path": ["api", "products", "cmsj4pxbt0000qglwtaxg3rlk"]
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "products",
+                    "cmsj4pxbt0000qglwtaxg3rlk"
+                  ]
                 }
               },
               "status": "OK",
@@ -954,8 +1120,14 @@
                 "header": [],
                 "url": {
                   "raw": "{{base_url}}/api/products/invalid_id_format",
-                  "host": ["{{base_url}}"],
-                  "path": ["api", "products", "invalid_id_format"]
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "products",
+                    "invalid_id_format"
+                  ]
                 }
               },
               "status": "Bad Request",
@@ -977,8 +1149,14 @@
                 "header": [],
                 "url": {
                   "raw": "{{base_url}}/api/products/cmsj4pxbt0000qglwtaxg3rlk",
-                  "host": ["{{base_url}}"],
-                  "path": ["api", "products", "cmsj4pxbt0000qglwtaxg3rlk"]
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "products",
+                    "cmsj4pxbt0000qglwtaxg3rlk"
+                  ]
                 }
               },
               "status": "Unauthorized",
@@ -1000,8 +1178,14 @@
                 "header": [],
                 "url": {
                   "raw": "{{base_url}}/api/products/non-existent-id",
-                  "host": ["{{base_url}}"],
-                  "path": ["api", "products", "non-existent-id"]
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "products",
+                    "non-existent-id"
+                  ]
                 }
               },
               "status": "Not Found",
@@ -1023,8 +1207,14 @@
                 "header": [],
                 "url": {
                   "raw": "{{base_url}}/api/products/cmsj4pxbt0000qglwtaxg3rlk",
-                  "host": ["{{base_url}}"],
-                  "path": ["api", "products", "cmsj4pxbt0000qglwtaxg3rlk"]
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "products",
+                    "cmsj4pxbt0000qglwtaxg3rlk"
+                  ]
                 }
               },
               "status": "Internal Server Error",
@@ -1067,8 +1257,14 @@
             },
             "url": {
               "raw": "{{base_url}}/api/products/:id",
-              "host": ["{{base_url}}"],
-              "path": ["api", "products", ":id"],
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "products",
+                ":id"
+              ],
               "variable": [
                 {
                   "key": "id",
@@ -1087,8 +1283,14 @@
                 "header": [],
                 "url": {
                   "raw": "{{base_url}}/api/products/cmsj4pxbt0000qglwtaxg3rlk",
-                  "host": ["{{base_url}}"],
-                  "path": ["api", "products", "cmsj4pxbt0000qglwtaxg3rlk"]
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "products",
+                    "cmsj4pxbt0000qglwtaxg3rlk"
+                  ]
                 }
               },
               "status": "OK",
@@ -1123,8 +1325,14 @@
                 },
                 "url": {
                   "raw": "{{base_url}}/api/products/cmsj4pxbt0000qglwtaxg3rlk",
-                  "host": ["{{base_url}}"],
-                  "path": ["api", "products", "cmsj4pxbt0000qglwtaxg3rlk"]
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "products",
+                    "cmsj4pxbt0000qglwtaxg3rlk"
+                  ]
                 }
               },
               "status": "OK",
@@ -1155,8 +1363,14 @@
                 },
                 "url": {
                   "raw": "{{base_url}}/api/products/cmsj4pxbt0000qglwtaxg3rlk",
-                  "host": ["{{base_url}}"],
-                  "path": ["api", "products", "cmsj4pxbt0000qglwtaxg3rlk"]
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "products",
+                    "cmsj4pxbt0000qglwtaxg3rlk"
+                  ]
                 }
               },
               "status": "Bad Request",
@@ -1178,8 +1392,14 @@
                 "header": [],
                 "url": {
                   "raw": "{{base_url}}/api/products/cmsj4pxbt0000qglwtaxg3rlk",
-                  "host": ["{{base_url}}"],
-                  "path": ["api", "products", "cmsj4pxbt0000qglwtaxg3rlk"]
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "products",
+                    "cmsj4pxbt0000qglwtaxg3rlk"
+                  ]
                 }
               },
               "status": "Unauthorized",
@@ -1201,8 +1421,14 @@
                 "header": [],
                 "url": {
                   "raw": "{{base_url}}/api/products/cmsj4pxbt0000qglwtaxg3rlk",
-                  "host": ["{{base_url}}"],
-                  "path": ["api", "products", "cmsj4pxbt0000qglwtaxg3rlk"]
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "products",
+                    "cmsj4pxbt0000qglwtaxg3rlk"
+                  ]
                 }
               },
               "status": "Forbidden",
@@ -1224,8 +1450,14 @@
                 "header": [],
                 "url": {
                   "raw": "{{base_url}}/api/products/non-existent-id",
-                  "host": ["{{base_url}}"],
-                  "path": ["api", "products", "non-existent-id"]
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "products",
+                    "non-existent-id"
+                  ]
                 }
               },
               "status": "Not Found",
@@ -1247,8 +1479,14 @@
                 "header": [],
                 "url": {
                   "raw": "{{base_url}}/api/products/cmsj4pxbt0000qglwtaxg3rlk",
-                  "host": ["{{base_url}}"],
-                  "path": ["api", "products", "cmsj4pxbt0000qglwtaxg3rlk"]
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "products",
+                    "cmsj4pxbt0000qglwtaxg3rlk"
+                  ]
                 }
               },
               "status": "Internal Server Error",
@@ -1282,8 +1520,14 @@
             "header": [],
             "url": {
               "raw": "{{base_url}}/api/products/:id",
-              "host": ["{{base_url}}"],
-              "path": ["api", "products", ":id"],
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "products",
+                ":id"
+              ],
               "variable": [
                 {
                   "key": "id",
@@ -1302,8 +1546,14 @@
                 "header": [],
                 "url": {
                   "raw": "{{base_url}}/api/products/cmsj4pxbt0000qglwtaxg3rlk",
-                  "host": ["{{base_url}}"],
-                  "path": ["api", "products", "cmsj4pxbt0000qglwtaxg3rlk"]
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "products",
+                    "cmsj4pxbt0000qglwtaxg3rlk"
+                  ]
                 }
               },
               "status": "OK",
@@ -1325,8 +1575,14 @@
                 "header": [],
                 "url": {
                   "raw": "{{base_url}}/api/products/cmsj4pxbt0000qglwtaxg3rlk",
-                  "host": ["{{base_url}}"],
-                  "path": ["api", "products", "cmsj4pxbt0000qglwtaxg3rlk"]
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "products",
+                    "cmsj4pxbt0000qglwtaxg3rlk"
+                  ]
                 }
               },
               "status": "Unauthorized",
@@ -1348,8 +1604,14 @@
                 "header": [],
                 "url": {
                   "raw": "{{base_url}}/api/products/cmsj4pxbt0000qglwtaxg3rlk",
-                  "host": ["{{base_url}}"],
-                  "path": ["api", "products", "cmsj4pxbt0000qglwtaxg3rlk"]
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "products",
+                    "cmsj4pxbt0000qglwtaxg3rlk"
+                  ]
                 }
               },
               "status": "Forbidden",
@@ -1371,8 +1633,14 @@
                 "header": [],
                 "url": {
                   "raw": "{{base_url}}/api/products/non-existent-id",
-                  "host": ["{{base_url}}"],
-                  "path": ["api", "products", "non-existent-id"]
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "products",
+                    "non-existent-id"
+                  ]
                 }
               },
               "status": "Not Found",
@@ -1394,8 +1662,14 @@
                 "header": [],
                 "url": {
                   "raw": "{{base_url}}/api/products/cmsj4pxbt0000qglwtaxg3rlk",
-                  "host": ["{{base_url}}"],
-                  "path": ["api", "products", "cmsj4pxbt0000qglwtaxg3rlk"]
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "products",
+                    "cmsj4pxbt0000qglwtaxg3rlk"
+                  ]
                 }
               },
               "status": "Internal Server Error",
@@ -1444,8 +1718,13 @@
             },
             "url": {
               "raw": "{{base_url}}/api/orders",
-              "host": ["{{base_url}}"],
-              "path": ["api", "orders"]
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "orders"
+              ]
             },
             "description": "Membuat transaksi order baru dalam 1 Database Transaction (prisma.$transaction) dengan pemotongan stok otomatis."
           },
@@ -1466,8 +1745,13 @@
                 },
                 "url": {
                   "raw": "{{base_url}}/api/orders",
-                  "host": ["{{base_url}}"],
-                  "path": ["api", "orders"]
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "orders"
+                  ]
                 }
               },
               "status": "Created",
@@ -1480,7 +1764,7 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"statusCode\": 201,\n  \"message\": \"Order created successfully\",\n  \"data\": {\n    \"id\": \"cmorder0123456789\",\n    \"userId\": \"cmsj0l6vc0003fslw2f3dwnjt\",\n    \"totalPrice\": 44000000,\n    \"status\": \"CONFIRMED\",\n    \"createdAt\": \"2026-08-08T03:00:00.000Z\",\n    \"updatedAt\": \"2026-08-08T03:00:00.000Z\",\n    \"user\": {\n      \"id\": \"cmsj0l6vc0003fslw2f3dwnjt\",\n      \"email\": \"user@solutech.id\",\n      \"name\": \"User Demo\"\n    },\n    \"items\": [\n      {\n        \"id\": \"cmitem0123456789\",\n        \"orderId\": \"cmorder0123456789\",\n        \"productId\": \"cmsj4pxbt0000qglwtaxg3rlk\",\n        \"quantity\": 2,\n        \"unitPrice\": 22000000,\n        \"product\": {\n          \"id\": \"cmsj4pxbt0000qglwtaxg3rlk\",\n          \"name\": \"Laptop ThinkPad X1 Carbon\",\n          \"price\": 22000000,\n          \"stock\": 8\n        }\n      }\n    ]\n  }\n}"
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 201,\n  \"message\": \"Order created successfully\",\n  \"data\": {\n    \"id\": \"cmorder0123456789\",\n    \"userId\": \"cmsj0l6vc0003fslw2f3dwnjt\",\n    \"totalPrice\": 44000000,\n    \"status\": \"CONFIRMED\",\n    \"createdAt\": \"2026-08-08T03:00:00.000Z\",\n    \"updatedAt\": \"2026-08-08T03:00:00.000Z\",\n    \"user\": {\n      \"id\": \"cmsj0l6vc0003fslw2f3dwnjt\",\n      \"email\": \"user_a@solutech.id\",\n      \"name\": \"User Demo\"\n    },\n    \"items\": [\n      {\n        \"id\": \"cmitem0123456789\",\n        \"orderId\": \"cmorder0123456789\",\n        \"productId\": \"cmsj4pxbt0000qglwtaxg3rlk\",\n        \"quantity\": 2,\n        \"unitPrice\": 22000000,\n        \"product\": {\n          \"id\": \"cmsj4pxbt0000qglwtaxg3rlk\",\n          \"name\": \"Laptop ThinkPad X1 Carbon\",\n          \"price\": 22000000,\n          \"stock\": 8\n        }\n      }\n    ]\n  }\n}"
             },
             {
               "name": "Example - 201 Created (Encrypted Payload Mode)",
@@ -1502,8 +1786,13 @@
                 },
                 "url": {
                   "raw": "{{base_url}}/api/orders",
-                  "host": ["{{base_url}}"],
-                  "path": ["api", "orders"]
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "orders"
+                  ]
                 }
               },
               "status": "Created",
@@ -1534,8 +1823,13 @@
                 },
                 "url": {
                   "raw": "{{base_url}}/api/orders",
-                  "host": ["{{base_url}}"],
-                  "path": ["api", "orders"]
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "orders"
+                  ]
                 }
               },
               "status": "Bad Request",
@@ -1557,8 +1851,13 @@
                 "header": [],
                 "url": {
                   "raw": "{{base_url}}/api/orders",
-                  "host": ["{{base_url}}"],
-                  "path": ["api", "orders"]
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "orders"
+                  ]
                 }
               },
               "status": "Unauthorized",
@@ -1589,8 +1888,13 @@
                 },
                 "url": {
                   "raw": "{{base_url}}/api/orders",
-                  "host": ["{{base_url}}"],
-                  "path": ["api", "orders"]
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "orders"
+                  ]
                 }
               },
               "status": "Internal Server Error",
@@ -1624,8 +1928,13 @@
             "header": [],
             "url": {
               "raw": "{{base_url}}/api/orders?page=1&limit=10",
-              "host": ["{{base_url}}"],
-              "path": ["api", "orders"],
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "orders"
+              ],
               "query": [
                 {
                   "key": "page",
@@ -1649,8 +1958,13 @@
                 "header": [],
                 "url": {
                   "raw": "{{base_url}}/api/orders?page=1&limit=10",
-                  "host": ["{{base_url}}"],
-                  "path": ["api", "orders"]
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "orders"
+                  ]
                 }
               },
               "status": "OK",
@@ -1663,7 +1977,7 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Orders retrieved successfully\",\n  \"data\": [\n    {\n      \"id\": \"cmorder0123456789\",\n      \"userId\": \"cmsj0l6vc0003fslw2f3dwnjt\",\n      \"totalPrice\": 44000000,\n      \"status\": \"PENDING\",\n      \"createdAt\": \"2026-08-08T03:00:00.000Z\",\n      \"updatedAt\": \"2026-08-08T03:00:00.000Z\",\n      \"user\": {\n        \"id\": \"cmsj0l6vc0003fslw2f3dwnjt\",\n        \"email\": \"user@solutech.id\",\n        \"name\": \"User Demo\"\n      },\n      \"items\": [\n        {\n          \"id\": \"cmitem0123456789\",\n          \"orderId\": \"cmorder0123456789\",\n          \"productId\": \"cmsj4pxbt0000qglwtaxg3rlk\",\n          \"quantity\": 2,\n          \"unitPrice\": 22000000\n        }\n      ]\n    }\n  ],\n  \"pagination\": {\n    \"total\": 1,\n    \"page\": 1,\n    \"limit\": 10,\n    \"totalPages\": 1\n  }\n}"
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Orders retrieved successfully\",\n  \"data\": [\n    {\n      \"id\": \"cmorder0123456789\",\n      \"userId\": \"cmsj0l6vc0003fslw2f3dwnjt\",\n      \"totalPrice\": 44000000,\n      \"status\": \"PENDING\",\n      \"createdAt\": \"2026-08-08T03:00:00.000Z\",\n      \"updatedAt\": \"2026-08-08T03:00:00.000Z\",\n      \"user\": {\n        \"id\": \"cmsj0l6vc0003fslw2f3dwnjt\",\n        \"email\": \"user_a@solutech.id\",\n        \"name\": \"User Demo\"\n      },\n      \"items\": [\n        {\n          \"id\": \"cmitem0123456789\",\n          \"orderId\": \"cmorder0123456789\",\n          \"productId\": \"cmsj4pxbt0000qglwtaxg3rlk\",\n          \"quantity\": 2,\n          \"unitPrice\": 22000000\n        }\n      ]\n    }\n  ],\n  \"pagination\": {\n    \"total\": 1,\n    \"page\": 1,\n    \"limit\": 10,\n    \"totalPages\": 1\n  }\n}"
             },
             {
               "name": "Example - 200 OK (Encrypted Response Mode)",
@@ -1677,8 +1991,13 @@
                 ],
                 "url": {
                   "raw": "{{base_url}}/api/orders?page=1&limit=10",
-                  "host": ["{{base_url}}"],
-                  "path": ["api", "orders"]
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "orders"
+                  ]
                 }
               },
               "status": "OK",
@@ -1700,8 +2019,13 @@
                 "header": [],
                 "url": {
                   "raw": "{{base_url}}/api/orders",
-                  "host": ["{{base_url}}"],
-                  "path": ["api", "orders"]
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "orders"
+                  ]
                 }
               },
               "status": "Unauthorized",
@@ -1723,8 +2047,13 @@
                 "header": [],
                 "url": {
                   "raw": "{{base_url}}/api/orders",
-                  "host": ["{{base_url}}"],
-                  "path": ["api", "orders"]
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "orders"
+                  ]
                 }
               },
               "status": "Internal Server Error",
@@ -1758,8 +2087,14 @@
             "header": [],
             "url": {
               "raw": "{{base_url}}/api/orders/:id",
-              "host": ["{{base_url}}"],
-              "path": ["api", "orders", ":id"],
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "orders",
+                ":id"
+              ],
               "variable": [
                 {
                   "key": "id",
@@ -1778,8 +2113,14 @@
                 "header": [],
                 "url": {
                   "raw": "{{base_url}}/api/orders/cmorder0123456789",
-                  "host": ["{{base_url}}"],
-                  "path": ["api", "orders", "cmorder0123456789"]
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "orders",
+                    "cmorder0123456789"
+                  ]
                 }
               },
               "status": "OK",
@@ -1792,7 +2133,7 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Order retrieved successfully\",\n  \"data\": {\n    \"id\": \"cmorder0123456789\",\n    \"userId\": \"cmsj0l6vc0003fslw2f3dwnjt\",\n    \"totalPrice\": 44000000,\n    \"status\": \"PENDING\",\n    \"createdAt\": \"2026-08-08T03:00:00.000Z\",\n    \"updatedAt\": \"2026-08-08T03:00:00.000Z\",\n    \"user\": {\n      \"id\": \"cmsj0l6vc0003fslw2f3dwnjt\",\n      \"email\": \"user@solutech.id\",\n      \"name\": \"User Demo\"\n    },\n    \"items\": [\n      {\n        \"id\": \"cmitem0123456789\",\n        \"orderId\": \"cmorder0123456789\",\n        \"productId\": \"cmsj4pxbt0000qglwtaxg3rlk\",\n        \"quantity\": 2,\n        \"unitPrice\": 22000000,\n        \"product\": {\n          \"id\": \"cmsj4pxbt0000qglwtaxg3rlk\",\n          \"name\": \"Laptop ThinkPad X1 Carbon\",\n          \"price\": 22000000,\n          \"stock\": 8\n        }\n      }\n    ]\n  }\n}"
+              "body": "{\n  \"success\": true,\n  \"statusCode\": 200,\n  \"message\": \"Order retrieved successfully\",\n  \"data\": {\n    \"id\": \"cmorder0123456789\",\n    \"userId\": \"cmsj0l6vc0003fslw2f3dwnjt\",\n    \"totalPrice\": 44000000,\n    \"status\": \"PENDING\",\n    \"createdAt\": \"2026-08-08T03:00:00.000Z\",\n    \"updatedAt\": \"2026-08-08T03:00:00.000Z\",\n    \"user\": {\n      \"id\": \"cmsj0l6vc0003fslw2f3dwnjt\",\n      \"email\": \"user_a@solutech.id\",\n      \"name\": \"User Demo\"\n    },\n    \"items\": [\n      {\n        \"id\": \"cmitem0123456789\",\n        \"orderId\": \"cmorder0123456789\",\n        \"productId\": \"cmsj4pxbt0000qglwtaxg3rlk\",\n        \"quantity\": 2,\n        \"unitPrice\": 22000000,\n        \"product\": {\n          \"id\": \"cmsj4pxbt0000qglwtaxg3rlk\",\n          \"name\": \"Laptop ThinkPad X1 Carbon\",\n          \"price\": 22000000,\n          \"stock\": 8\n        }\n      }\n    ]\n  }\n}"
             },
             {
               "name": "Example - 401 Unauthorized (Missing Bearer Token)",
@@ -1801,8 +2142,14 @@
                 "header": [],
                 "url": {
                   "raw": "{{base_url}}/api/orders/cmorder0123456789",
-                  "host": ["{{base_url}}"],
-                  "path": ["api", "orders", "cmorder0123456789"]
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "orders",
+                    "cmorder0123456789"
+                  ]
                 }
               },
               "status": "Unauthorized",
@@ -1824,8 +2171,14 @@
                 "header": [],
                 "url": {
                   "raw": "{{base_url}}/api/orders/cmorder0123456789",
-                  "host": ["{{base_url}}"],
-                  "path": ["api", "orders", "cmorder0123456789"]
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "orders",
+                    "cmorder0123456789"
+                  ]
                 }
               },
               "status": "Forbidden",
@@ -1847,8 +2200,14 @@
                 "header": [],
                 "url": {
                   "raw": "{{base_url}}/api/orders/non-existent-order",
-                  "host": ["{{base_url}}"],
-                  "path": ["api", "orders", "non-existent-order"]
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "orders",
+                    "non-existent-order"
+                  ]
                 }
               },
               "status": "Not Found",
@@ -1870,8 +2229,14 @@
                 "header": [],
                 "url": {
                   "raw": "{{base_url}}/api/orders/cmorder0123456789",
-                  "host": ["{{base_url}}"],
-                  "path": ["api", "orders", "cmorder0123456789"]
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "orders",
+                    "cmorder0123456789"
+                  ]
                 }
               },
               "status": "Internal Server Error",

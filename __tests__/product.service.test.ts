@@ -2,8 +2,10 @@ import { productService } from "@/lib/modules/product/product.service";
 import { productRepository } from "@/lib/modules/product/product.repository";
 import { AppError } from "@/lib/errors/AppError";
 import { Prisma } from "@/generated/prisma";
+import * as redisModule from "@/lib/redis";
 
 jest.mock("@/lib/modules/product/product.repository");
+jest.mock("@/lib/redis");
 
 const mockProductRepository = productRepository as jest.Mocked<typeof productRepository>;
 

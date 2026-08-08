@@ -18,9 +18,15 @@ export const userData: UserSeedData[] = [
     roleName: "ADMIN",
   },
   {
-    email: "user@solutech.id",
+    email: "user_a@solutech.id",
     plainPassword: "User@123",
-    name: "User Demo",
+    name: "User Demo A",
+    roleName: "USER",
+  },
+  {
+    email: "user_b@solutech.id",
+    plainPassword: "User@123",
+    name: "User Demo B",
     roleName: "USER",
   },
 ];

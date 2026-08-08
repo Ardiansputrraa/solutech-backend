@@ -106,7 +106,7 @@ npx prisma migrate dev
 #### Script DDL SQL Manual (Opsional — Tidak Wajib)
 
 > **Catatan:** Dengan menjalankan perintah `npx prisma migrate dev` pada langkah di atas, seluruh skema dan tabel database PostgreSQL **sudah dibuat secara otomatis oleh Prisma**. Anda **TIDAK PERLU** membuat tabel secara manual.
-> File DDL SQL murni (Create Table) telah disediakan di dalam repository pada file [`docs/database/schema.sql`](file:///C:/Users/ardia/OneDrive/Documents/Project%20Ardian/solutech-backend/docs/database/schema.sql).
+> File DDL SQL murni (Create Table) telah disediakan di dalam repository pada file [`docs/database/schema.sql`](file:/solutech-backend/docs/database/schema.sql).
 > Script DDL SQL di bawah ini disediakan sebagai referensi opsional jika Anda ingin mengeksekusi DDL secara manual di PostgreSQL Client (DBeaver / pgAdmin / psql):
 
 ```sql
